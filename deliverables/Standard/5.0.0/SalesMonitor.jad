@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+RIM-COD-Module-Name: SalesMonitor
+RIM-COD-Module-Dependencies: net_rim_cldc
+MIDlet-Jar-Size: 34016
+MIDlet-1: ,,
+RIM-COD-Creation-Time: 1277573993
+MIDlet-Jar-URL: SalesMonitor.jar
+RIM-COD-URL: SalesMonitor.cod
+RIM-COD-SHA1: 8a 33 0f af 2a a1 30 2e df 80 4b 2b 67 7f 31 b7 b5 bf cd c5
+RIM-COD-Size: 35948
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-Version: 1.0.0
+MIDlet-Name: SalesMonitor
+MIDlet-Vendor: BlackBerry Developer
+MicroEdition-Profile: MIDP-2.0
+RIM-MIDlet-Flags-1: 0
