@@ -34,7 +34,11 @@ public class salesdetailsController extends MainScreen {
         		font.derive(Font.PLAIN,2);
         		rf.setFont(font);
         		add(rf);
-        		this.cantidad+=Float.valueOf(data.getProperty(3).toString().replace(',', '.')).floatValue();
+        		String cantidadS=data.getProperty(3).toString().replace('.', ' ');
+        		cantidadS=cantidadS.trim();
+        		cantidadS=salesmonitorutility.removeBlankSpace(cantidadS);
+        		cantidadS=cantidadS.replace(',', '.');
+        		this.cantidad+=Float.valueOf(cantidadS).floatValue();
         	}
         }
         catch(Exception ex)
