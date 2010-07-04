@@ -9,13 +9,17 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransport;
 import org.xmlpull.v1.XmlPullParserException;
+import net.rim.device.api.i18n.ResourceBundle;
 
-public class salesmonitormodel 
+public class salesmonitormodel implements salesmonitorResource
 {
-	private String appserver="http://www.apweb.com.ve/webservice/server.php";
+	//private String appserver="http://www.apweb.com.ve/webservice/server.php";
+	private String appserver="";
 	//private String appserver="http://www.librerialatina.com.ve/webservice/server.php";
 	public salesmonitormodel()
 	{
+		ResourceBundle _resources = ResourceBundle.getBundle(BUNDLE_ID, BUNDLE_NAME);
+		this.appserver=_resources.getString(URLWS);
 		
 	}
 	public Vector adquireData(String webmethod,String soapaction, Hashtable parameters) throws Exception
