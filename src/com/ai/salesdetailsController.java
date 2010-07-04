@@ -10,6 +10,7 @@ import net.rim.device.api.ui.component.RichTextField;
 import net.rim.device.api.ui.container.MainScreen;
 
 public class salesdetailsController extends MainScreen {
+	private float cantidad=0;
 	public salesdetailsController (int idtienda) {
 
         super(Manager.NO_VERTICAL_SCROLL | Manager.NO_VERTICAL_SCROLLBAR);
@@ -32,7 +33,8 @@ public class salesdetailsController extends MainScreen {
         		Font font = Font.getDefault();
         		font.derive(Font.PLAIN,2);
         		rf.setFont(font);
-        		add(rf);     		
+        		add(rf);
+        		this.cantidad+=Float.valueOf(data.getProperty(3).toString().replace(',', '.')).floatValue();
         	}
         }
         catch(Exception ex)
@@ -40,5 +42,12 @@ public class salesdetailsController extends MainScreen {
         	add(new RichTextField(ex.getMessage()));
         }
      }
+	public salesdetailsController (int idtienda,float cantidad,salesControllerScreen main) 
+	{
+		this(idtienda);
+		if (this.cantidad>cantidad)
+			main.repaintScreen();
+		
+	}
 
 }

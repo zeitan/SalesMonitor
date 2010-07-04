@@ -65,7 +65,9 @@ public class salesControllerScreen extends MainScreen
 	        		font.derive(Font.PLAIN,2);
 	        		rf.setFont(font);
 	        		this.add(rf);        		
-	        		this.add(new labelhyperlink("Detalles", Integer.parseInt(data.getProperty(4).toString())));	        
+	        		//this.add(new labelhyperlink("Detalles", Integer.parseInt(data.getProperty(4).toString())));
+	        		this.add(new labelhyperlink("Detalles", Integer.parseInt(data.getProperty(4).toString()),Float.valueOf(data.getProperty(3).toString().replace(',', '.')).floatValue(),this));
+	        		
 	        	}
         	}
         	else
@@ -86,7 +88,7 @@ public class salesControllerScreen extends MainScreen
     {
     	this.clearScreen();
     	this.paintScreen();
-    	//this.add(new RichTextField("Vuelta"));
+    	//this.add(new RichTextField("Repintado"));
     }
     	
     class RefreshScreenTask extends TimerTask

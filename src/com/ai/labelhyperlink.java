@@ -26,6 +26,15 @@ public class labelhyperlink extends LabelField {
         setFont(font.derive(Font.UNDERLINED | Font.PLAIN));
         mGetLinkMenuItem = new SampleOpenScreenMenuItem(hyperlinkLabel);
     }
+    public labelhyperlink(String hyperlinkLabel, int pageCount,float cantidad, salesControllerScreen main) 
+    {    	
+        super(hyperlinkLabel, FOCUSABLE);
+        this.pageCount = pageCount;
+        Font font = getBasefontSize(10);
+        setFont(font.derive(Font.UNDERLINED | Font.PLAIN));
+        //mGetLinkMenuItem = new SampleOpenScreenMenuItem(hyperlinkLabel);
+        mGetLinkMenuItem = new SampleOpenScreenMenuItem(hyperlinkLabel,cantidad,main);
+    } 
 
     /**
      * Context menu
@@ -42,12 +51,20 @@ public class labelhyperlink extends LabelField {
      */
     class SampleOpenScreenMenuItem extends MenuItem {
 
+    	float cantidad;
+    	salesControllerScreen ventasmain;
         public SampleOpenScreenMenuItem(String menuLabel) {
             super(menuLabel, 0, 100);
         }
-
+        public SampleOpenScreenMenuItem(String menuLabel,float cantidad, salesControllerScreen main)
+        {
+        	super(menuLabel, 0, 100);
+        	this.cantidad=cantidad;
+        	this.ventasmain=main;
+        }
         public void run() {
-            UiApplication.getUiApplication().pushScreen(new salesdetailsController(pageCount));
+            //UiApplication.getUiApplication().pushScreen(new salesdetailsController(pageCount));
+        	UiApplication.getUiApplication().pushScreen(new salesdetailsController(pageCount,this.cantidad,this.ventasmain));
 
         }
 
@@ -70,3 +87,4 @@ public class labelhyperlink extends LabelField {
         return baseFont;
     }
 }
+

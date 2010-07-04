@@ -12,8 +12,8 @@ import org.xmlpull.v1.XmlPullParserException;
 
 public class salesmonitormodel 
 {
-	private String appserver="http://www.apweb.com.ve/webservice/server.php";
-	//private String appserver="http://www.librerialatina.com.ve/webservice/server.php";
+	//private String appserver="http://www.apweb.com.ve/webservice/server.php";
+	private String appserver="http://www.librerialatina.com.ve/webservice/server.php";
 	public salesmonitormodel()
 	{
 		
