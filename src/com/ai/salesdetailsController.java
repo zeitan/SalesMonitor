@@ -11,7 +11,7 @@ import net.rim.device.api.ui.container.MainScreen;
 
 public class salesdetailsController extends MainScreen {
 	private float cantidad=0;
-	public salesdetailsController (int idtienda) {
+	public salesdetailsController (int idtienda, String pin) {
 
         super(Manager.NO_VERTICAL_SCROLL | Manager.NO_VERTICAL_SCROLLBAR);
         salesmonitormodel model= new salesmonitormodel();
@@ -20,10 +20,16 @@ public class salesdetailsController extends MainScreen {
         //add(new RichTextField("Ventas: " + this.adquireData()));
         try
         {
-        	
+            String hashkey=salesmonitorutility.hashPin(pin);
         	parameter param=new parameter("id", new Integer(idtienda));
         	++countParams;
         	params.put(new Integer(countParams), param);
+        	
+        	//parameter param=new parameter("hash", hashkey);        	
+        	//++countParams;
+        	//params.put(new Integer(countParams), param);
+
+        	
         	Vector result=model.adquireData("ventas_hoy5hora", "http://tempuri.org#ventas_hoy5hora", params);
         	for(int i=0; i<result.size();i++)
         	{
@@ -48,7 +54,7 @@ public class salesdetailsController extends MainScreen {
      }
 	public salesdetailsController (int idtienda,float cantidad,salesControllerScreen main) 
 	{
-		this(idtienda);
+		this(idtienda,main.getPin());
 		if (this.cantidad>cantidad)
 			main.repaintScreen();
 		

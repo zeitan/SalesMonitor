@@ -20,12 +20,22 @@ import net.rim.device.api.system.*;
 
 public class salesControllerScreen extends MainScreen 
 {
+	public void setPin(String pin) {
+		this.pin = pin;
+	}
+
+	public String getPin() {
+		return pin;
+	}
+
+	private String pin="";
     public salesControllerScreen() 
     {
         super();
         this.paintScreen();
         new RefreshScreenTask(this);
     }
+
     private void clearScreen()
     {
     	try
@@ -42,13 +52,19 @@ public class salesControllerScreen extends MainScreen
         salesmonitormodel model= new salesmonitormodel();
         Hashtable params= new Hashtable();
         int countParams=0;
+        String hashkey=salesmonitorutility.hashPin(this.pin);
         //add(new RichTextField("Ventas: " + this.adquireData()));
         try
         {
         	
-        	parameter param=new parameter("id", new Integer(1));
+        	parameter param=new parameter("id", new Integer(1));        	
         	++countParams;
         	params.put(new Integer(countParams), param);
+        	
+        	//parameter param=new parameter("hash", hashkey);        	
+        	//++countParams;
+        	//params.put(new Integer(countParams), param);
+        	
         	Vector result=model.adquireData("ventas_hoy", "http://tempuri.org#ventas_hoy", params);
         	if(result.size()>0)
         	{
