@@ -66,7 +66,11 @@ public class salesControllerScreen extends MainScreen
 	        		rf.setFont(font);
 	        		this.add(rf);        		
 	        		//this.add(new labelhyperlink("Detalles", Integer.parseInt(data.getProperty(4).toString())));
-	        		this.add(new labelhyperlink("Detalles", Integer.parseInt(data.getProperty(4).toString()),Float.valueOf(data.getProperty(3).toString().replace(',', '.')).floatValue(),this));
+	        		String cantidadS=data.getProperty(3).toString().replace('.', ' ');
+	        		cantidadS=cantidadS.trim();
+	        		cantidadS=salesmonitorutility.removeBlankSpace(cantidadS);
+	        		cantidadS=cantidadS.replace(',', '.');	        		
+	        		this.add(new labelhyperlink("Detalles", Integer.parseInt(data.getProperty(4).toString()),Float.valueOf(cantidadS).floatValue(),this));
 	        		
 	        	}
         	}
@@ -84,6 +88,8 @@ public class salesControllerScreen extends MainScreen
         }*/
     	
     }
+    /* remove leading whitespace */
+
     public void repaintScreen()
     {
     	this.clearScreen();

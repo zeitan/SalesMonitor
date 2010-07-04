@@ -1,13 +1,13 @@
 <loader version="1.0">
 	<application id="SalesMonitor">
 		<name >
-			
+			Monitor de Ventas
 		</name>
 		<description >
 			
 		</description>
 		<version >
-			1.0.0
+			0.3.0
 		</version>
 		<vendor >
 			BlackBerry Developer
