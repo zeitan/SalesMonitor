@@ -19,7 +19,7 @@ public class salesmonitormodel implements salesmonitorResource
 	public salesmonitormodel()
 	{
 		ResourceBundle _resources = ResourceBundle.getBundle(BUNDLE_ID, BUNDLE_NAME);
-		this.appserver=_resources.getString(URLWS);
+		this.appserver=_resources.getString(URLWS)+salesmonitorutility.updateConnectionSuffix();
 		
 	}
 	public Vector adquireData(String webmethod,String soapaction, Hashtable parameters) throws Exception
