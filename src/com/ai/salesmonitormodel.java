@@ -20,7 +20,7 @@ public class salesmonitormodel implements salesmonitorResource
 	{
 		ResourceBundle _resources = ResourceBundle.getBundle(BUNDLE_ID, BUNDLE_NAME);
 		this.appserver=_resources.getString(URLWS)+salesmonitorutility.updateConnectionSuffix();
-		
+		//this.appserver=_resources.getString(URLWS)+";deviceside=true;interface=wifi";
 	}
 	public Vector adquireData(String webmethod,String soapaction, Hashtable parameters) throws Exception
 	{
