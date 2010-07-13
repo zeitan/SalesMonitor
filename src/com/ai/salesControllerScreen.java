@@ -68,13 +68,15 @@ public class salesControllerScreen extends MainScreen
         	if(result.size()>0)
         	{
         		String hora=((SoapObject) result.elementAt(0)).getProperty(2).toString();
-                LabelField title = new LabelField("Ventas de la Latina a las " + hora, LabelField.ELLIPSIS | LabelField.USE_ALL_WIDTH);
-                setTitle(title);
+        		String fecha=((SoapObject) result.elementAt(0)).getProperty(1).toString();                
+        		LabelField status= new LabelField(fecha+"/"+hora); 
+                setTitle("Monitor de Ventas");
+                setStatus(status);
         		
 	        	for(int i=0; i<result.size();i++)
 	        	{
 	        		SoapObject data=(SoapObject) result.elementAt(i);  
-	        		String Linea="Tienda: "+data.getProperty(0)+" Fecha: "+data.getProperty(1)+" Hora: "+data.getProperty(2)+" T.Venta: "+data.getProperty(3)+" T.Contado:"+data.getProperty(5)+" T.Credito:"+data.getProperty(6)+" T.Devoluciones:"+data.getProperty(7)+" T.Tickets:"+data.getProperty(8);
+	        		String Linea="Tienda: "+data.getProperty(0)+" T.Venta: "+data.getProperty(3)+" T.Contado:"+data.getProperty(5)+" T.Credito:"+data.getProperty(6)+" T.Devoluciones:"+data.getProperty(7)+" T.Tickets:"+data.getProperty(8);
 	        		RichTextField rf=new RichTextField(Linea);
 	        		Font font = Font.getDefault();
 	        		font.derive(Font.PLAIN,2);

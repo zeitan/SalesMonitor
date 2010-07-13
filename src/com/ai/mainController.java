@@ -15,7 +15,7 @@ public class mainController extends UiApplication
     {
 		
     	mainController theApp = new mainController();    	
-        theApp.enterEventDispatcher();  
+        theApp.enterEventDispatcher();        
     }
     public mainController() 
     {
