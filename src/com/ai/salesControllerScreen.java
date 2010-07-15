@@ -76,20 +76,27 @@ public class salesControllerScreen extends MainScreen
 	        	for(int i=0; i<result.size();i++)
 	        	{
 	        		SoapObject data=(SoapObject) result.elementAt(i);  
-	        		String Linea="Tienda: "+data.getProperty(0)+" T.Venta: "+data.getProperty(3)+" T.Contado:"+data.getProperty(5)+" T.Credito:"+data.getProperty(6)+" T.Devoluciones:"+data.getProperty(7)+" T.Tickets:"+data.getProperty(8);
-	        		RichTextField rf=new RichTextField(Linea);
-	        		Font font = Font.getDefault();
-	        		font.derive(Font.PLAIN,2);
-	        		rf.setFont(font);
-	        		this.add(rf);        		
-	        		//this.add(new labelhyperlink("Detalles", Integer.parseInt(data.getProperty(4).toString())));
+	        		String Linea=data.getProperty(0).toString();
+	        		RichTextField rfheader=new RichTextField(Linea);
+	        		Font fontheader = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 12);
+	        		fontheader.derive(Font.UNDERLINED | Font.PLAIN);
+	        		rfheader.setFont(fontheader);
+	        		this.add(rfheader);
+	        		Linea="Ventas: "+data.getProperty(3)+" Contado:"+data.getProperty(5)+" Credito:"+data.getProperty(6)+" Devoluciones:"+data.getProperty(7)+" T.Tickets:"+data.getProperty(8);
+	        		RichTextField rfdetails=new RichTextField(Linea);
+	        		Font fontdetails = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 11);
+	        		fontdetails.derive(Font.PLAIN);
+	        		rfdetails.setFont(fontdetails);
+	        		this.add(rfdetails);	        		
 	        		String cantidadS=data.getProperty(3).toString().replace('.', ' ');
 	        		cantidadS=cantidadS.trim();
 	        		cantidadS=salesmonitorutility.removeBlankSpace(cantidadS);
 	        		cantidadS=cantidadS.replace(',', '.');	        		
 	        		this.add(new labelhyperlink("Detalles", Integer.parseInt(data.getProperty(4).toString()),Float.valueOf(cantidadS).floatValue(),this));
+	        		this.add(new LabelField(""));
 	        		
 	        	}
+
         	}
         	else
         		this.add(new RichTextField("No se devolvio información"));

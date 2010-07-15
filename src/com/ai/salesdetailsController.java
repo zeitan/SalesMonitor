@@ -5,6 +5,7 @@ import java.util.Vector;
 import org.ksoap2.serialization.SoapObject;
 
 import net.rim.device.api.ui.Font;
+import net.rim.device.api.ui.FontFamily;
 import net.rim.device.api.ui.Manager;
 import net.rim.device.api.ui.component.LabelField;
 import net.rim.device.api.ui.component.RichTextField;
@@ -42,14 +43,20 @@ public class salesdetailsController extends MainScreen {
                 setStatus(status);        		
 	        	for(int i=0; i<result.size();i++)
 	        	{
-	        		SoapObject data=(SoapObject) result.elementAt(i);  
-	        		String Linea="Hora: "+data.getProperty(2)+" T.Venta: "+data.getProperty(3)+" T.Contado:"+data.getProperty(5)+" T.Credito:"+data.getProperty(6)+" T.Devoluciones:"+data.getProperty(7)+" T.Tickets:"+data.getProperty(8);
-	        		RichTextField rf=new RichTextField(Linea);
-	        		Font font = Font.getDefault();
-	        		font.derive(Font.PLAIN,2);
-	        		rf.setFont(font);
-	        		add(rf);
-	        		add(new RichTextField("    =======   "));
+	        		SoapObject data=(SoapObject) result.elementAt(i); 
+	        		String Linea=data.getProperty(2).toString();
+	        		RichTextField rfheader=new RichTextField(Linea);
+	        		Font fontheader = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 12);
+	        		fontheader.derive(Font.UNDERLINED | Font.PLAIN);
+	        		rfheader.setFont(fontheader);
+	        		this.add(rfheader);
+	        		Linea="Ventas: "+data.getProperty(3)+" Contado:"+data.getProperty(5)+" Credito:"+data.getProperty(6)+" Devoluciones:"+data.getProperty(7)+" T.Tickets:"+data.getProperty(8);
+	        		RichTextField rfdetails=new RichTextField(Linea);
+	        		Font fontdetails = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 11);
+	        		fontdetails.derive(Font.PLAIN);
+	        		rfdetails.setFont(fontdetails);
+	        		this.add(rfdetails);      		
+	        		add(new LabelField(""));
 	        		String cantidadS=data.getProperty(3).toString().replace('.', ' ');
 	        		cantidadS=cantidadS.trim();
 	        		cantidadS=salesmonitorutility.removeBlankSpace(cantidadS);

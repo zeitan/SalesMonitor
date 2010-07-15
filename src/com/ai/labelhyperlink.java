@@ -14,6 +14,8 @@ import net.rim.device.api.ui.component.LabelField;
 public class labelhyperlink extends LabelField {
 
     private int pageCount = -1;
+    private float cantidad;
+    private salesControllerScreen ventasmain;
     private MenuItem mGetLinkMenuItem;
     /**
      * 
@@ -23,8 +25,7 @@ public class labelhyperlink extends LabelField {
         super(hyperlinkLabel, FOCUSABLE);
         this.pageCount = pageCount;
         Font font = getBasefontSize(10);
-        setFont(font.derive(Font.UNDERLINED | Font.PLAIN));
-        mGetLinkMenuItem = new SampleOpenScreenMenuItem(hyperlinkLabel);
+        setFont(font.derive(Font.UNDERLINED | Font.PLAIN));        
     }
     public labelhyperlink(String hyperlinkLabel, int pageCount,float cantidad, salesControllerScreen main) 
     {    	
@@ -32,43 +33,19 @@ public class labelhyperlink extends LabelField {
         this.pageCount = pageCount;
         Font font = getBasefontSize(10);
         setFont(font.derive(Font.UNDERLINED | Font.PLAIN));
+        this.cantidad=cantidad;
+        this.ventasmain=main;
         //mGetLinkMenuItem = new SampleOpenScreenMenuItem(hyperlinkLabel);
-        mGetLinkMenuItem = new SampleOpenScreenMenuItem(hyperlinkLabel,cantidad,main);
+        //mGetLinkMenuItem = new SampleOpenScreenMenuItem(hyperlinkLabel,cantidad,main);
     } 
 
-    /**
-     * Context menu
-     */
-    public ContextMenu getContextMenu() {
-        // Add our "Get Link" menu item to the context menu
-        ContextMenu menu = super.getContextMenu();
-        menu.addItem(mGetLinkMenuItem);
-        return menu;
+    public boolean navigationClick(int status, int time)
+    {
+    	UiApplication.getUiApplication().pushScreen(new salesdetailsController(pageCount,this.cantidad,this.ventasmain));
+    	return true;
     }
+    
 
-    /**
-     * Inner class 
-     */
-    class SampleOpenScreenMenuItem extends MenuItem {
-
-    	float cantidad;
-    	salesControllerScreen ventasmain;
-        public SampleOpenScreenMenuItem(String menuLabel) {
-            super(menuLabel, 0, 100);
-        }
-        public SampleOpenScreenMenuItem(String menuLabel,float cantidad, salesControllerScreen main)
-        {
-        	super(menuLabel, 0, 100);
-        	this.cantidad=cantidad;
-        	this.ventasmain=main;
-        }
-        public void run() {
-            //UiApplication.getUiApplication().pushScreen(new salesdetailsController(pageCount));
-        	UiApplication.getUiApplication().pushScreen(new salesdetailsController(pageCount,this.cantidad,this.ventasmain));
-
-        }
-
-    }
 
     /**
      * Base font of the application. Method is static for other UI components to
