@@ -78,9 +78,8 @@ public class salesControllerScreen extends MainScreen
 	        		SoapObject data=(SoapObject) result.elementAt(i);  
 	        		String Linea=data.getProperty(0).toString();
 	        		RichTextField rfheader=new RichTextField(Linea);
-	        		Font fontheader = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 12);
-	        		fontheader.derive(Font.UNDERLINED | Font.PLAIN);
-	        		rfheader.setFont(fontheader);
+	        		Font fontheader = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 12);	        		
+	        		rfheader.setFont(fontheader.derive(Font.UNDERLINED | Font.PLAIN));
 	        		this.add(rfheader);
 	        		Linea="Ventas: "+data.getProperty(3)+" Contado:"+data.getProperty(5)+" Credito:"+data.getProperty(6)+" Devoluciones:"+data.getProperty(7)+" T.Tickets:"+data.getProperty(8);
 	        		RichTextField rfdetails=new RichTextField(Linea);
