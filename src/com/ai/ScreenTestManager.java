@@ -36,6 +36,9 @@ public class ScreenTestManager extends MainScreen
 		
 		
 		LabelField lf=new LabelField("TestTestTestTestTestTestTestTest");
+		labelhyperlink lhl=new labelhyperlink("Test", 1);
+		labelhyperlink lhl2=new labelhyperlink("Test2", 1);
+		labelhyperlink lhl3=new labelhyperlink("Test3", 1);
 		try
 		{
 		Font fontheader = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 12);		
@@ -56,8 +59,11 @@ public class ScreenTestManager extends MainScreen
 		
 		HorizontalManager1.setHightlightColor(15592941);
 		HorizontalManager1.add(lf);
+		HorizontalManager1.add(lhl);
+		HorizontalManager1.add(lhl2);
 		HorizontalManager2.setHightlightColor(16777164);
 		HorizontalManager2.add(lf2);
+		HorizontalManager2.add(lhl3);
 		mVerticalPanel.add(HorizontalManager1);
 		mVerticalPanel.add(HorizontalManager2);
 		}
