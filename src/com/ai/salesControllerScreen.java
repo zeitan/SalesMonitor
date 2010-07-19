@@ -20,12 +20,21 @@ import net.rim.device.api.system.*;
 
 public class salesControllerScreen extends MainScreen 
 {
-    public salesControllerScreen() 
+	private String pin="";
+	
+    public salesControllerScreen(String pin) 
     {
         super();
+        this.pin=pin;
         this.paintScreen();
         new RefreshScreenTask(this);
     }
+
+
+	public String getPin() {
+		return pin;
+	}
+  
     private void clearScreen()
     {
     	try
@@ -42,37 +51,51 @@ public class salesControllerScreen extends MainScreen
         salesmonitormodel model= new salesmonitormodel();
         Hashtable params= new Hashtable();
         int countParams=0;
+        String hashkey=salesmonitorutility.hashPin(this.pin);
         //add(new RichTextField("Ventas: " + this.adquireData()));
         try
         {
         	
-        	parameter param=new parameter("id", new Integer(1));
+        	parameter param=new parameter("id", new Integer(1));        	
         	++countParams;
         	params.put(new Integer(countParams), param);
+        	
+        	param=new parameter("hashkey", hashkey);        	
+        	++countParams;
+        	params.put(new Integer(countParams), param);
+        	
         	Vector result=model.adquireData("ventas_hoy", "http://tempuri.org#ventas_hoy", params);
         	if(result.size()>0)
         	{
         		String hora=((SoapObject) result.elementAt(0)).getProperty(2).toString();
-                LabelField title = new LabelField("Ventas de la Latina a las " + hora, LabelField.ELLIPSIS | LabelField.USE_ALL_WIDTH);
-                setTitle(title);
+        		String fecha=((SoapObject) result.elementAt(0)).getProperty(1).toString();                
+        		LabelField status= new LabelField(fecha+"-"+hora); 
+                setTitle("Monitor de Ventas");
+                setStatus(status);
         		
 	        	for(int i=0; i<result.size();i++)
 	        	{
 	        		SoapObject data=(SoapObject) result.elementAt(i);  
-	        		String Linea="Tienda: "+data.getProperty(0)+" Fecha: "+data.getProperty(1)+" Hora: "+data.getProperty(2)+" Venta: "+data.getProperty(3);
-	        		RichTextField rf=new RichTextField(Linea);
-	        		Font font = Font.getDefault();
-	        		font.derive(Font.PLAIN,2);
-	        		rf.setFont(font);
-	        		this.add(rf);        		
-	        		//this.add(new labelhyperlink("Detalles", Integer.parseInt(data.getProperty(4).toString())));
+	        		String Linea=data.getProperty(0).toString();
+	        		RichTextField rfheader=new RichTextField(Linea);
+	        		Font fontheader = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 12);	        		
+	        		rfheader.setFont(fontheader.derive(Font.UNDERLINED | Font.PLAIN));
+	        		this.add(rfheader);
+	        		Linea="Ventas: "+data.getProperty(3)+" Contado:"+data.getProperty(5)+" Credito:"+data.getProperty(6)+" Devoluciones:"+data.getProperty(7)+" T.Tickets:"+data.getProperty(8);
+	        		RichTextField rfdetails=new RichTextField(Linea);
+	        		Font fontdetails = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 11);
+	        		fontdetails.derive(Font.PLAIN);
+	        		rfdetails.setFont(fontdetails);
+	        		this.add(rfdetails);	        		
 	        		String cantidadS=data.getProperty(3).toString().replace('.', ' ');
 	        		cantidadS=cantidadS.trim();
 	        		cantidadS=salesmonitorutility.removeBlankSpace(cantidadS);
 	        		cantidadS=cantidadS.replace(',', '.');	        		
 	        		this.add(new labelhyperlink("Detalles", Integer.parseInt(data.getProperty(4).toString()),Float.valueOf(cantidadS).floatValue(),this));
+	        		this.add(new LabelField(""));
 	        		
 	        	}
+
         	}
         	else
         		this.add(new RichTextField("No se devolvio información"));
