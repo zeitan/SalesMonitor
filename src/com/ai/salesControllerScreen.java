@@ -69,7 +69,7 @@ public class salesControllerScreen extends MainScreen
         	{
         		String hora=((SoapObject) result.elementAt(0)).getProperty(2).toString();
         		String fecha=((SoapObject) result.elementAt(0)).getProperty(1).toString();                
-        		LabelField status= new LabelField(fecha+"/"+hora); 
+        		LabelField status= new LabelField(fecha+"-"+hora); 
                 setTitle("Monitor de Ventas");
                 setStatus(status);
         		

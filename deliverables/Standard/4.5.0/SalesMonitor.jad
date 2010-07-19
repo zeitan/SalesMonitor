@@ -3,13 +3,13 @@ RIM-COD-Module-Name: SalesMonitor
 RIM-COD-Module-Dependencies: net_rim_cldc,net_rim_os
 MIDlet-Jar-Size: 45608
 MIDlet-1: Monitor de Ventas,,
-RIM-COD-Creation-Time: 1279155873
+RIM-COD-Creation-Time: 1279574340
 MIDlet-Jar-URL: SalesMonitor.jar
 RIM-COD-URL: SalesMonitor.cod
-RIM-COD-SHA1: 00 03 74 7e e6 b6 a9 83 b4 c8 0b c6 4f 98 20 fe 18 b8 82 24
-RIM-COD-Size: 42580
+RIM-COD-SHA1: cf fc 0b 02 ff 2b 69 d2 c0 07 7c 74 94 58 b3 4b e3 85 55 d4
+RIM-COD-Size: 42576
 MicroEdition-Configuration: CLDC-1.1
-MIDlet-Version: 0.4.0
+MIDlet-Version: 0.5.0
 MIDlet-Name: SalesMonitor
 MIDlet-Vendor: BlackBerry Developer
 MicroEdition-Profile: MIDP-2.0
