@@ -18,15 +18,16 @@ public class ScreenTestManager extends MainScreen
 		            super.sublayout((Display.getWidth()/3)*2, height);
 		        }
 		};
-		 
-		myHorizontalFieldManager HorizontalManager1 = new myHorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | USE_ALL_WIDTH)
+		//long sizeheightpanel=(long)USE_ALL_HEIGHT/4; 
+		myHorizontalFieldManager HorizontalManager1 = new myHorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | USE_ALL_WIDTH )
 		/*{
 		            protected void sublayout(int width, int height) {
 		            super.sublayout(Display.getWidth()/3, height);
 		        }
 		}*/;
 		
-		myHorizontalFieldManager HorizontalManager2 = new myHorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | USE_ALL_WIDTH)
+		myHorizontalFieldManager HorizontalManager2 = new myHorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | USE_ALL_WIDTH );
+		HorizontalFieldManager explodeManager= new HorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | HorizontalFieldManager.FIELD_HCENTER |  HorizontalFieldManager.FIELD_VCENTER)
 		/*{
 		            protected void sublayout(int width, int height) {
 		            super.sublayout((Display.getWidth()/3)*2, height);
@@ -35,9 +36,11 @@ public class ScreenTestManager extends MainScreen
 		
 		
 		
-		LabelField lf=new LabelField("TestTestTestTestTestTestTestTest");
-		labelhyperlink lhl=new labelhyperlink("Test", 1);
-		labelhyperlink lhl2=new labelhyperlink("Test2", 1);
+		BitmapField bf=new BitmapField(Bitmap.getBitmapResource("border.png"));
+		
+		LabelField lf=new LabelField("Empresa Demo");
+		LabelField lf3=new LabelField("Ventas:20.326,56 Contado:25.245,26 Credito:20000,45 Devoluciones:-4500,23 Tickets:711");
+		//labelhyperlink lhl=new labelhyperlink("+", 1);		
 		labelhyperlink lhl3=new labelhyperlink("Test3", 1);
 		try
 		{
@@ -45,10 +48,9 @@ public class ScreenTestManager extends MainScreen
 		lf.setFont(fontheader.derive(Font.UNDERLINED | Font.PLAIN));
 		
 		LabelField lf2=new LabelField("Test1Test1Test1Test1Test1Test1Test1 Test1Test1Test1Test1 Test1Test1Test1 ");
-		Font fontdetails = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 9);
-		fontdetails.derive(Font.PLAIN);
-		lf2.setFont(fontdetails);
-		
+		Font fontdetails = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 9);		
+		lf2.setFont(fontdetails.derive(Font.PLAIN));
+		lf3.setFont(fontdetails.derive(Font.PLAIN));
 		
 		HorizontalFieldManager mMainPanel;
 		VerticalFieldManager mVerticalPanel;
@@ -58,13 +60,34 @@ public class ScreenTestManager extends MainScreen
 		mMainPanel.add(mVerticalPanel);
 		
 		HorizontalManager1.setHightlightColor(15592941);
-		HorizontalManager1.add(lf);
-		HorizontalManager1.add(lhl);
-		HorizontalManager1.add(lhl2);
+		HorizontalManager1.add(bf);
+		VerticalFieldManager textVFM=new VerticalFieldManager();
+		VerticalFieldManager infoVFM=new VerticalFieldManager();
+		HorizontalFieldManager buttonManagerHF=new HorizontalFieldManager()
+		{
+	        protected void onUnfocus() {		         
+		         super.onUnfocus();
+		         deleteAll();
+		        }
+			
+		}
+		;
+		labelfieldexploit lhl=new labelfieldexploit("+", FOCUSABLE,buttonManagerHF );
+		Font fontexploit = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 18);
+		lhl.setFont(fontexploit.derive(Font.PLAIN));		
+		textVFM.add(lf);
+		textVFM.add(lf3);
+		HorizontalManager1.add(textVFM);
+		//HorizontalManager1.add(lf);
+		explodeManager.add(lhl);
+		HorizontalManager1.add(explodeManager);
+		infoVFM.add(HorizontalManager1);
+		infoVFM.add(buttonManagerHF);
+		//HorizontalManager1.add(lhl2);
 		HorizontalManager2.setHightlightColor(16777164);
 		HorizontalManager2.add(lf2);
 		HorizontalManager2.add(lhl3);
-		mVerticalPanel.add(HorizontalManager1);
+		mVerticalPanel.add(infoVFM);
 		mVerticalPanel.add(HorizontalManager2);
 		}
 		catch(Exception ex)
@@ -103,6 +126,13 @@ public class ScreenTestManager extends MainScreen
 		        setHorizontalScroll(newHorizontalScroll);
 		    }
 		});*/
+	
+
+	
+
+
+		
+		
 	}
 	 private class myHorizontalFieldManager extends HorizontalFieldManager implements ScrollChangeListener {
 	       
@@ -145,14 +175,30 @@ public class ScreenTestManager extends MainScreen
 	         super.onUnfocus();
 	        }
 
+            //define width
+            public int getPreferredWidth()
+            {
+                return Display.getWidth();
+            }
+            //define height
+            public int getPreferredHeight()
+            {
+                return 50;
+            }
+            protected void sublayout( int maxWidth, int maxHeight )
+            {
+                super.sublayout(getPreferredWidth(), 
+                                getPreferredHeight());
+                setExtent(getPreferredWidth(), getPreferredHeight());
+            }
+	        
 	        public void paint(Graphics graphics) {
-	         if (-1 != mHColor && isFocus()) {
 	          graphics.setBackgroundColor(mHColor);	          
 	          graphics.clear();
-	         }
-	          graphics.setBackgroundColor(mHColor);	          
-	          graphics.clear();	         
-	         //graphics.drawBitmap((0, 0, Display.getWidth(), Display.getHeight(), BitmapProvider.scaledBackground, 0, 0);
+	          //graphics.drawBitmap(0, 0, 450, getPreferredHeight(), Bitmap.getBitmapResource("border.png"), 0, 0);
+	          graphics.drawRect(0, 0, getPreferredWidth(), getPreferredHeight());
+	          
+	          //graphics.drawRoundRect(0, 0, getPreferredWidth(), getPreferredHeight(), 10, 10);
 	         super.paint(graphics);
 	        }
 
