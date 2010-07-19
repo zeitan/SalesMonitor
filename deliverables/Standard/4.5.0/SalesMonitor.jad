@@ -1,13 +1,13 @@
 Manifest-Version: 1.0
 RIM-COD-Module-Name: SalesMonitor
 RIM-COD-Module-Dependencies: net_rim_cldc,net_rim_os
-MIDlet-Jar-Size: 45608
+MIDlet-Jar-Size: 45646
 MIDlet-1: Monitor de Ventas,,
-RIM-COD-Creation-Time: 1279574340
+RIM-COD-Creation-Time: 1279576102
 MIDlet-Jar-URL: SalesMonitor.jar
 RIM-COD-URL: SalesMonitor.cod
-RIM-COD-SHA1: cf fc 0b 02 ff 2b 69 d2 c0 07 7c 74 94 58 b3 4b e3 85 55 d4
-RIM-COD-Size: 42576
+RIM-COD-SHA1: 37 88 ac 2f 19 48 79 cc de 90 05 57 2b 80 88 e7 b6 22 29 eb
+RIM-COD-Size: 42588
 MicroEdition-Configuration: CLDC-1.1
 MIDlet-Version: 0.5.0
 MIDlet-Name: SalesMonitor
