@@ -1,8 +1,12 @@
 package com.ai;
+import java.util.Hashtable;
+
 import net.rim.device.api.ui.*;
 import net.rim.device.api.ui.component.*;
 import net.rim.device.api.ui.container.*;
+import net.rim.device.api.util.DateTimeUtilities;
 import net.rim.device.api.system.*;
+import java.util.Vector;
 public class ScreenTestManager extends MainScreen 
 {
 	public ScreenTestManager()
@@ -72,11 +76,51 @@ public class ScreenTestManager extends MainScreen
 			
 		}
 		;
-		labelfieldexploit lhl=new labelfieldexploit("+", FOCUSABLE,buttonManagerHF );
+		int countParams=0;
+		Hashtable paramsDetails= new Hashtable();
+    	++countParams;
+		parameter param1=new parameter("idtienda", new Integer(1));
+		paramsDetails.put(new Integer(countParams), param1);
+		
+    	++countParams;
+		parameter param2=new parameter("cantidad", new Float(50));
+		paramsDetails.put(new Integer(countParams), param2);
+
+    	++countParams;
+		parameter param3=new parameter("salesmainScreen", (salesControllerScreen) new Object());
+		paramsDetails.put(new Integer(countParams), param3);
+		
+    	++countParams;
+		parameter param4=new parameter("webmethod", "ventas_hoy5hora");
+		paramsDetails.put(new Integer(countParams), param4);
+
+		
+		parameter paramLFexploit1=new parameter("Detalles",paramsDetails);
+		parameter paramLFexploit2=new parameter("Ayer","PIN");
+		
+		countParams=0;
+		Hashtable paramsRangeDate= new Hashtable();
+    	
+		++countParams;
+		parameter paramfrom=new parameter("desde", "dd-mm-yyyy");
+		paramsRangeDate.put(new Integer(countParams), paramfrom);
+		++countParams;
+		parameter paramto=new parameter("hasta", "dd-mm-yyyy");
+		paramsRangeDate.put(new Integer(countParams), paramto);
+
+		
+		parameter paramLFexploit3=new parameter("Semana",paramsRangeDate);
+
+		Vector params=new Vector();
+		params.addElement(paramLFexploit1);
+		params.addElement(paramLFexploit2);
+		params.addElement(paramLFexploit3);
+		labelfieldexploit lhl=new labelfieldexploit("+", FOCUSABLE,buttonManagerHF,params );
 		Font fontexploit = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 18);
-		lhl.setFont(fontexploit.derive(Font.PLAIN));		
+		lhl.setFont(fontexploit.derive(Font.PLAIN));
+		
 		textVFM.add(lf);
-		textVFM.add(lf3);
+		textVFM.add(lf3);		
 		HorizontalManager1.add(textVFM);
 		//HorizontalManager1.add(lf);
 		explodeManager.add(lhl);

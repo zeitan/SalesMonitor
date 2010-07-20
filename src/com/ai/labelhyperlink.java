@@ -27,6 +27,12 @@ public class labelhyperlink extends LabelField {
         Font font = getBasefontSize(10);
         setFont(font.derive(Font.UNDERLINED | Font.PLAIN));        
     }
+    public labelhyperlink(String hyperlinkLabel, Object params) {
+        super(hyperlinkLabel, FOCUSABLE);
+        this.pageCount = pageCount;
+        Font font = getBasefontSize(10);
+        setFont(font.derive(Font.UNDERLINED | Font.PLAIN));        
+    }    
     public labelhyperlink(String hyperlinkLabel, int pageCount,float cantidad, salesControllerScreen main) 
     {    	
         super(hyperlinkLabel, FOCUSABLE);
