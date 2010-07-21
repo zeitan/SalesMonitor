@@ -80,20 +80,21 @@ public class ScreenTestManager extends MainScreen
 		Hashtable paramsDetails= new Hashtable();
     	++countParams;
 		parameter param1=new parameter("idtienda", new Integer(1));
-		paramsDetails.put(new Integer(countParams), param1);
+		paramsDetails.put(options.getName(options.IDTIENDA), param1);
 		
     	++countParams;
 		parameter param2=new parameter("cantidad", new Float(50));
-		paramsDetails.put(new Integer(countParams), param2);
+		paramsDetails.put(options.getName(options.CANTIDAD), param2);
 
     	++countParams;
 		parameter param3=new parameter("salesmainScreen",  new Object());
-		paramsDetails.put(new Integer(countParams), param3);
+		paramsDetails.put(options.getName(options.MAIN), param3);
 		
     	++countParams;
 		parameter param4=new parameter("webmethod", "ventas_hoy5hora");
-		paramsDetails.put(new Integer(countParams), param4);
+		paramsDetails.put(options.getName(options.WEBMETHOD), param4);
 
+		
 		
 		parameter paramLFexploit1=new parameter(options.getName(options.VENTASDETALLES),paramsDetails);
 		parameter paramLFexploit2=new parameter(options.getName(options.VENTASAYER),"PIN");
@@ -103,10 +104,10 @@ public class ScreenTestManager extends MainScreen
     	
 		++countParams;
 		parameter paramfrom=new parameter("desde", "dd-mm-yyyy");
-		paramsRangeDate.put(new Integer(countParams), paramfrom);
+		paramsRangeDate.put(options.getName(options.FECHADESDE), paramfrom);
 		++countParams;
 		parameter paramto=new parameter("hasta", "dd-mm-yyyy");
-		paramsRangeDate.put(new Integer(countParams), paramto);
+		paramsRangeDate.put(options.getName(options.FECHAHASTA), paramto);
 
 		
 		parameter paramLFexploit3=new parameter(options.getName(options.VENTASSEMANA),paramsRangeDate);

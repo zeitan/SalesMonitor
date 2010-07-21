@@ -13,18 +13,50 @@ import net.rim.device.api.ui.container.MainScreen;
 
 public class salesdetailsController extends MainScreen {
 	private float cantidad=0;
+	private String webmethod="ventas_hoy5hora";
+	private int idtienda;
+	private String pin;
 	public salesdetailsController (int idtienda, String pin) {
 
         //super(Manager.NO_VERTICAL_SCROLL | Manager.NO_VERTICAL_SCROLLBAR);
 		super();
+		this.idtienda=idtienda;
+		this.pin=pin;
+		this.paintScreen();
+
+     }
+
+	public salesdetailsController (int idtienda,float cantidad,salesControllerScreen main) 
+	{
+		this(idtienda,main.getPin());
+		if (this.cantidad>cantidad)
+			main.repaintScreen();
+		
+	}
+
+	public salesdetailsController(Hashtable params)
+	{
+		
+		this.webmethod=((parameter)params.get(options.getName(options.WEBMETHOD))).getValue().toString();
+		this.idtienda= ((Integer)((parameter)params.get(options.getName(options.IDTIENDA))).getValue()).intValue();
+		float cantidad= ((Float)((parameter)params.get(options.getName(options.IDTIENDA))).getValue()).floatValue();
+		salesControllerScreen sc= ((salesControllerScreen)((parameter)params.get(options.getName(options.MAIN))).getValue());
+		this.pin=sc.getPin();
+		this.paintScreen();
+		if (this.cantidad>cantidad)
+			sc.repaintScreen();
+		
+	}
+	private void paintScreen()
+	{
         salesmonitormodel model= new salesmonitormodel();
         Hashtable params= new Hashtable();
         int countParams=0;
         //add(new RichTextField("Ventas: " + this.adquireData()));
         try
         {
-            String hashkey=salesmonitorutility.hashPin(pin);
-        	parameter param=new parameter("id", new Integer(idtienda));
+            String hashkey=salesmonitorutility.hashPin(this.pin);
+        	parameter param=new parameter("id", new Integer(this.idtienda));
         	++countParams;
         	params.put(new Integer(countParams), param);
         	
@@ -33,7 +65,7 @@ public class salesdetailsController extends MainScreen {
         	params.put(new Integer(countParams), param);
 
         	
-        	Vector result=model.adquireData("ventas_hoy5hora", "http://tempuri.org#ventas_hoy5hora", params);
+        	Vector result=model.adquireData(this.webmethod, "http://tempuri.org#"+this.webmethod, params);
         	if (result.size()>0)
         	{
         		String fecha=((SoapObject) result.elementAt(0)).getProperty(1).toString();
@@ -68,14 +100,7 @@ public class salesdetailsController extends MainScreen {
         catch(Exception ex)
         {
         	add(new RichTextField(ex.getMessage()));
-        }
-     }
-	public salesdetailsController (int idtienda,float cantidad,salesControllerScreen main) 
-	{
-		this(idtienda,main.getPin());
-		if (this.cantidad>cantidad)
-			main.repaintScreen();
+        }		
 		
 	}
-
 }
