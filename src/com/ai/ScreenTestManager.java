@@ -87,7 +87,7 @@ public class ScreenTestManager extends MainScreen
 		paramsDetails.put(new Integer(countParams), param2);
 
     	++countParams;
-		parameter param3=new parameter("salesmainScreen", (salesControllerScreen) new Object());
+		parameter param3=new parameter("salesmainScreen",  new Object());
 		paramsDetails.put(new Integer(countParams), param3);
 		
     	++countParams;
@@ -95,8 +95,8 @@ public class ScreenTestManager extends MainScreen
 		paramsDetails.put(new Integer(countParams), param4);
 
 		
-		parameter paramLFexploit1=new parameter("Detalles",paramsDetails);
-		parameter paramLFexploit2=new parameter("Ayer","PIN");
+		parameter paramLFexploit1=new parameter(options.getName(options.VENTASDETALLES),paramsDetails);
+		parameter paramLFexploit2=new parameter(options.getName(options.VENTASAYER),"PIN");
 		
 		countParams=0;
 		Hashtable paramsRangeDate= new Hashtable();
@@ -109,12 +109,14 @@ public class ScreenTestManager extends MainScreen
 		paramsRangeDate.put(new Integer(countParams), paramto);
 
 		
-		parameter paramLFexploit3=new parameter("Semana",paramsRangeDate);
+		parameter paramLFexploit3=new parameter(options.getName(options.VENTASSEMANA),paramsRangeDate);
 
 		Vector params=new Vector();
+		
 		params.addElement(paramLFexploit1);
 		params.addElement(paramLFexploit2);
 		params.addElement(paramLFexploit3);
+		
 		labelfieldexploit lhl=new labelfieldexploit("+", FOCUSABLE,buttonManagerHF,params );
 		Font fontexploit = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 18);
 		lhl.setFont(fontexploit.derive(Font.PLAIN));
