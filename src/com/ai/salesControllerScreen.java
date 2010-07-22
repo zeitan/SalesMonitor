@@ -23,6 +23,7 @@ public class salesControllerScreen extends MainScreen
 {
 	private String pin="";
 	private String webmethod="ventas_hoy";
+	private String webmethodDetails="ventas_hoy5hora";
 	final int BLUE=1799612;
 	final int WHITE=16777215;
 	final int BLACK=0;
@@ -33,11 +34,12 @@ public class salesControllerScreen extends MainScreen
         this.paintScreen();
         new RefreshScreenTask(this);
     }
-    public salesControllerScreen(String pin, String webmetod) 
+    public salesControllerScreen(String pin, String webmetod, String webmethoddetails) 
     {
         super();
         this.pin=pin;
         this.webmethod=webmetod;
+        this.webmethodDetails=webmethoddetails;
         this.paintScreen();        
         if(this.webmethod.equals("ventas_hoy"))
         	new RefreshScreenTask(this);
@@ -153,7 +155,7 @@ public class salesControllerScreen extends MainScreen
         		String fecha=((SoapObject) result.elementAt(0)).getProperty(1).toString();
         		LabelField status;
         		if(this.webmethod.equals("ventas_hoy"))
-        			status= new LabelField(fecha+"/"+hora);
+        			status= new LabelField(fecha+" "+hora);
         		else
         			status= new LabelField(fecha);        		
                 setTitle("Monitor de Ventas");
@@ -165,16 +167,16 @@ public class salesControllerScreen extends MainScreen
 	        		String header=data.getProperty(0).toString();
 	        		String details="Ventas: "+data.getProperty(3)+" Contado:"+data.getProperty(5)+" Credito:"+data.getProperty(6)+" Devoluciones:"+data.getProperty(7)+" T.Tickets:"+data.getProperty(8);
 
-	        		int colorpanel=(i%2==0)?this.BLUE:this.WHITE;
-	        		//int colorlabel=(i%2==0)?this.WHITE:this.BLUE;
-	        		mVerticalPanel.add(this.buildPanel(header, details, colorpanel, this.BLACK, avatar));
-	        		
 	        		String cantidadS=data.getProperty(3).toString().replace('.', ' ');
 	        		cantidadS=cantidadS.trim();
 	        		cantidadS=salesmonitorutility.removeBlankSpace(cantidadS);
-	        		cantidadS=cantidadS.replace(',', '.');	        		
-	        		//this.add(new labelhyperlink("Detalles", Integer.parseInt(data.getProperty(4).toString()),Float.valueOf(cantidadS).floatValue(),this));
-	        		//this.add(new LabelField(""));
+	        		cantidadS=cantidadS.replace(',', '.');	
+	        		
+	        		int colorpanel=(i%2==0)?this.BLUE:this.WHITE;
+	        		int colorlabel=(i%2==0)?this.WHITE:this.BLACK;
+	        		
+	        		mVerticalPanel.add(this.buildPanel(header, details, colorpanel, colorlabel, avatar,Integer.parseInt(data.getProperty(4).toString()) ,Float.parseFloat(cantidadS),this.webmethodDetails));
+	        		
 	        		
 	        	}
 
@@ -187,14 +189,14 @@ public class salesControllerScreen extends MainScreen
         	this.add(new RichTextField(ex.getMessage()));
         }    	
     }
-    private VerticalFieldManager buildPanel(String header, String details, int colorpanel, int colorlabel, Bitmap avatar)
+    private VerticalFieldManager buildPanel(String header, String details, int colorpanel, int colorlabel, Bitmap avatar, int idtienda, float cantidad, String webmethod)
     {
     	PanelHorizontalFieldManager HorizontalManager1 = new PanelHorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | USE_ALL_WIDTH );
     	HorizontalFieldManager explodeManager= new HorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | HorizontalFieldManager.FIELD_HCENTER |  HorizontalFieldManager.FIELD_VCENTER);
 		BitmapField bf=new BitmapField(avatar);
 		
-		LabelField lfhead=new LabelField(header);
-		LabelField lfdetails=new LabelField(details);
+		moneylabelfield lfhead=new moneylabelfield(header,colorlabel);
+		moneylabelfield lfdetails=new moneylabelfield(details,colorlabel);
 	
 
 		try
@@ -213,7 +215,8 @@ public class salesControllerScreen extends MainScreen
 		HorizontalManager1.add(bf);
 		VerticalFieldManager textVFM=new VerticalFieldManager();
 		VerticalFieldManager infoVFM=new VerticalFieldManager();
-		HorizontalFieldManager buttonManagerHF=new HorizontalFieldManager()
+		moneyhorizontalfiedlmanager buttonManagerHF=new moneyhorizontalfiedlmanager();   
+		/*HorizontalFieldManager buttonManagerHF=new HorizontalFieldManager()
 		{
 	        protected void onUnfocus() {		         
 		         super.onUnfocus();
@@ -221,15 +224,15 @@ public class salesControllerScreen extends MainScreen
 		        }
 			
 		}
-		;
+		;*/
 		
 		Hashtable paramsDetails= new Hashtable();
     	
-		parameter param1=new parameter("idtienda", new Integer(1));
+		parameter param1=new parameter("idtienda", new Integer(idtienda));
 		paramsDetails.put(options.getName(options.IDTIENDA), param1);
 		
     	
-		parameter param2=new parameter("cantidad", new Float(50));
+		parameter param2=new parameter("cantidad", new Float(cantidad));
 		paramsDetails.put(options.getName(options.CANTIDAD), param2);
 
     	
@@ -237,7 +240,7 @@ public class salesControllerScreen extends MainScreen
 		paramsDetails.put(options.getName(options.MAIN), param3);
 		
     	
-		parameter param4=new parameter("webmethod", "ventas_hoy5hora");
+		parameter param4=new parameter("webmethod", webmethod);
 		paramsDetails.put(options.getName(options.WEBMETHOD), param4);
 
 		
@@ -247,7 +250,7 @@ public class salesControllerScreen extends MainScreen
 		
 		params.addElement(paramLFexploit1);
 		
-		labelfieldexploit lhl=new labelfieldexploit("+", FOCUSABLE,buttonManagerHF,params );
+		labelfieldexploit lhl=new labelfieldexploit("+", FOCUSABLE,buttonManagerHF,params, colorlabel );
 		Font fontexploit = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 18);
 		lhl.setFont(fontexploit.derive(Font.PLAIN));
 		

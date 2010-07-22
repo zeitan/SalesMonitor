@@ -67,6 +67,7 @@ public class ScreenTestManager extends MainScreen
 		HorizontalManager1.add(bf);
 		VerticalFieldManager textVFM=new VerticalFieldManager();
 		VerticalFieldManager infoVFM=new VerticalFieldManager();
+		
 		HorizontalFieldManager buttonManagerHF=new HorizontalFieldManager()
 		{
 	        protected void onUnfocus() {		         
@@ -118,7 +119,7 @@ public class ScreenTestManager extends MainScreen
 		params.addElement(paramLFexploit2);
 		params.addElement(paramLFexploit3);
 		
-		labelfieldexploit lhl=new labelfieldexploit("+", FOCUSABLE,buttonManagerHF,params );
+		labelfieldexploit lhl=new labelfieldexploit("+", FOCUSABLE,null,params,0 );
 		Font fontexploit = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 18);
 		lhl.setFont(fontexploit.derive(Font.PLAIN));
 		

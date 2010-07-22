@@ -39,7 +39,7 @@ public class salesdetailsController extends MainScreen {
 		
 		this.webmethod=((parameter)params.get(options.getName(options.WEBMETHOD))).getValue().toString();
 		this.idtienda= ((Integer)((parameter)params.get(options.getName(options.IDTIENDA))).getValue()).intValue();
-		float cantidad= ((Float)((parameter)params.get(options.getName(options.IDTIENDA))).getValue()).floatValue();
+		float cantidad= ((Float)((parameter)params.get(options.getName(options.CANTIDAD))).getValue()).floatValue();
 		salesControllerScreen sc= ((salesControllerScreen)((parameter)params.get(options.getName(options.MAIN))).getValue());
 		this.pin=sc.getPin();
 		this.paintScreen();
