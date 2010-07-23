@@ -11,6 +11,12 @@ public class moneylabelfield extends LabelField
 		super(text);
 		this.colorlabel=colorlabel;
 	}
+	
+	public moneylabelfield(String text, int colorlabel, long style) 
+	{
+		super(text,style);
+		this.colorlabel=colorlabel;
+	}	
     public void paint(Graphics graphics)
     {
         graphics.setColor(this.colorlabel);

@@ -24,9 +24,6 @@ public class salesControllerScreen extends MainScreen
 	private String pin="";
 	private String webmethod="ventas_hoy";
 	private String webmethodDetails="ventas_hoy5hora";
-	final int BLUE=1799612;
-	final int WHITE=16777215;
-	final int BLACK=0;
     public salesControllerScreen(String pin) 
     {
         super();
@@ -172,8 +169,8 @@ public class salesControllerScreen extends MainScreen
 	        		cantidadS=salesmonitorutility.removeBlankSpace(cantidadS);
 	        		cantidadS=cantidadS.replace(',', '.');	
 	        		
-	        		int colorpanel=(i%2==0)?this.BLUE:this.WHITE;
-	        		int colorlabel=(i%2==0)?this.WHITE:this.BLACK;
+	        		int colorpanel=(i%2==0)?options.BLUE:options.WHITE;
+	        		int colorlabel=(i%2==0)?options.WHITE:options.BLACK;
 	        		
 	        		mVerticalPanel.add(this.buildPanel(header, details, colorpanel, colorlabel, avatar,Integer.parseInt(data.getProperty(4).toString()) ,Float.parseFloat(cantidadS),this.webmethodDetails));
 	        		
@@ -243,6 +240,8 @@ public class salesControllerScreen extends MainScreen
 		parameter param4=new parameter("webmethod", webmethod);
 		paramsDetails.put(options.getName(options.WEBMETHOD), param4);
 
+		parameter param5=new parameter("avatar", avatar);
+		paramsDetails.put(options.getName(options.AVATAR), param5);
 		
 		
 		parameter paramLFexploit1=new parameter(options.getName(options.VENTASDETALLES),paramsDetails);

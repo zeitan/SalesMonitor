@@ -14,6 +14,12 @@ public class options
 	final static int FECHAHASTA=10;
 	final static int CANTIDAD=11;
 	final static int VENTASRANGO=12;
+	final static int AVATAR=13;
+	
+	final static int BLUE=1799612;
+	final static int WHITE=16777215;
+	final static int BLACK=0;
+	
 	public static String getName(int action)
 	{		
 		switch(action)
@@ -42,7 +48,8 @@ public class options
 				return "Cantidad";	
 			case VENTASRANGO:
 				return "Ventas Rango";	
-
+			case AVATAR:
+				return "Avatar";	
 				
 		}
 		return "";
@@ -61,6 +68,7 @@ public class options
 		if (option.equals("Fecha Hasta")) return FECHAHASTA;
 		if (option.equals("Cantidad")) return FECHAHASTA;
 		if (option.equals("Ventas Rango")) return VENTASRANGO;
+		if (option.equals("Avatar")) return AVATAR;
 		return -1;
 	}	
 }
