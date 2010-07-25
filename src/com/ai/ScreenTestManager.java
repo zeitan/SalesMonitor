@@ -1,4 +1,6 @@
 package com.ai;
+
+
 import java.util.Hashtable;
 
 import net.rim.device.api.ui.*;
@@ -7,10 +9,38 @@ import net.rim.device.api.ui.container.*;
 import net.rim.device.api.util.DateTimeUtilities;
 import net.rim.device.api.system.*;
 import java.util.Vector;
+import net.rim.device.api.io.Base64InputStream;
+import org.ksoap2.serialization.SoapObject;
 public class ScreenTestManager extends MainScreen 
 {
 	public ScreenTestManager()
 	{
+	
+    	salesmonitormodel model= new salesmonitormodel();        
+        Hashtable params= new Hashtable();
+		
+        Vector data= model.adquireData("icono", "http://tempuri.org#icono", params);
+        if(data.size()>0)
+        {
+		byte[] imageBytes = (((SoapObject)data.elementAt(0) ).getProperty(0))  .getBytes("UTF-8");
+
+		 
+
+		byte[] bs = Base64InputStream.decode(imageBytes, 0, imageBytes.length);
+
+		 
+
+		EncodedImage myImage = EncodedImage.createEncodedImage(bs, 0, bs.length);
+
+		 
+
+		BitmapField bmf = new BitmapField();
+
+		bmf.setImage(myImage);
+
+		add(bmf)
+        }
+/*		
 		VerticalFieldManager VerticalManager1 = new VerticalFieldManager(Manager.VERTICAL_SCROLL|Field.NON_FOCUSABLE){
             protected void sublayout(int width, int height) {
             super.sublayout(Display.getWidth()/3, height);
@@ -29,7 +59,7 @@ public class ScreenTestManager extends MainScreen
 		            super.sublayout(Display.getWidth()/3, height);
 		        }
 		}*/;
-		
+/*		
 		myHorizontalFieldManager HorizontalManager2 = new myHorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | USE_ALL_WIDTH );
 		HorizontalFieldManager explodeManager= new HorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | HorizontalFieldManager.FIELD_HCENTER |  HorizontalFieldManager.FIELD_VCENTER)
 		/*{
@@ -39,7 +69,7 @@ public class ScreenTestManager extends MainScreen
 		}*/;
 		
 		
-		
+/*		
 		BitmapField bf=new BitmapField(Bitmap.getBitmapResource("border.png"));
 		
 		LabelField lf=new LabelField("Empresa Demo");
