@@ -1,6 +1,6 @@
 MIDlet-Name: SalesMonitor
-MIDlet-Version: 0.5.0
-MIDlet-Vendor: BlackBerry Developer
+MIDlet-Version: 0.5.1
+MIDlet-Vendor: AI
 MIDlet-Jar-URL: SalesMonitor.jar
 MIDlet-Jar-Size: 0
 MicroEdition-Profile: MIDP-2.0
