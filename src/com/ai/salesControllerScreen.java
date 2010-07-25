@@ -78,14 +78,13 @@ public class salesControllerScreen extends MainScreen
 	        		SoapObject data=(SoapObject) result.elementAt(i);  
 	        		String Linea=data.getProperty(0).toString();
 	        		RichTextField rfheader=new RichTextField(Linea);
-	        		Font fontheader = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 12);	        		
+	        		Font fontheader = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 14);	        		
 	        		rfheader.setFont(fontheader.derive(Font.UNDERLINED | Font.PLAIN));
 	        		this.add(rfheader);
 	        		Linea="Ventas: "+data.getProperty(3)+" Contado:"+data.getProperty(5)+" Credito:"+data.getProperty(6)+" Devoluciones:"+data.getProperty(7)+" T.Tickets:"+data.getProperty(8);
 	        		RichTextField rfdetails=new RichTextField(Linea);
-	        		Font fontdetails = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 11);
-	        		fontdetails.derive(Font.PLAIN);
-	        		rfdetails.setFont(fontdetails);
+	        		Font fontdetails = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 13);	        		
+	        		rfdetails.setFont(fontdetails.derive(Font.PLAIN));
 	        		this.add(rfdetails);	        		
 	        		String cantidadS=data.getProperty(3).toString().replace('.', ' ');
 	        		cantidadS=cantidadS.trim();
