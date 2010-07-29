@@ -95,7 +95,7 @@ public class salesdetailsController extends MainScreen {
         		mVerticalPanel.add(avatarPanel);
         		mMainPanel.add(mVerticalPanel);
         		LabelField status= new LabelField(fecha); 
-                setTitle("Monitor de Ventas");
+        		setTitle(options.appName +"-" + options.appVersion);
                 setStatus(status);        		
 	        	for(int i=0; i<result.size();i++)
 	        	{

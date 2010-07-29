@@ -1,7 +1,10 @@
 package com.ai;
+import net.rim.device.api.system.ApplicationDescriptor;
+
 
 public class options 
 {
+	private static ApplicationDescriptor descriptor = ApplicationDescriptor.currentApplicationDescriptor(); 
 	final static int VENTASHOY=1;
 	final static int VENTASAYER=2;
 	final static int VENTASSEMANA=3;
@@ -19,7 +22,8 @@ public class options
 	final static int BLUE=1799612;
 	final static int WHITE=16777215;
 	final static int BLACK=0;
-	
+	final static String appName=descriptor.getName();
+	final static String appVersion=descriptor.getVersion();
 	public static String getName(int action)
 	{		
 		switch(action)
@@ -71,4 +75,5 @@ public class options
 		if (option.equals("Avatar")) return AVATAR;
 		return -1;
 	}	
+	 
 }

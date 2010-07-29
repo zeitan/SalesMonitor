@@ -155,7 +155,7 @@ public class salesControllerScreen extends MainScreen
         			status= new LabelField(fecha+" "+hora);
         		else
         			status= new LabelField(fecha);        		
-                setTitle("Monitor de Ventas");
+                setTitle(options.appName +"-" + options.appVersion);
                 setStatus(status);
         		
 	        	for(int i=0; i<result.size();i++)
@@ -276,7 +276,6 @@ public class salesControllerScreen extends MainScreen
     {
     	this.clearScreen();
     	this.paintScreen();
-    	//this.add(new RichTextField("Repintado"));
     }
     	
     class RefreshScreenTask extends TimerTask
@@ -300,6 +299,27 @@ public class salesControllerScreen extends MainScreen
     		//timer.cancel (); 
     		}
     }
-        
+    
+    class OptionsMenuItem extends MenuItem {
+
+        //float cantidad;
+        salesControllerScreen ventasmain;
+           public OptionsMenuItem (String menuLabel) {
+               super(menuLabel, 0, 100);
+           }
+           public OptionsMenuItem (String menuLabel,float cantidad, salesControllerScreen main)
+           {
+            super(menuLabel, 0, 100);
+            this.ventasmain=main;
+           }
+           public void run() 
+           {
+        	   ventasmain.repaintScreen();
+               //UiApplication.getUiApplication().pushScreen(new salesdetailsController(pageCount));
+            //UiApplication.getUiApplication().pushScreen(new salesdetailsController(pageCount,this.cantidad,this.ventasmain));
+
+           }
+
+       }        
     
 }

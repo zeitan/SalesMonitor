@@ -16,7 +16,7 @@ public class ScreenTestManager extends MainScreen
 	public ScreenTestManager()
 	{
 	
-    	salesmonitormodel model= new salesmonitormodel();        
+    	/*salesmonitormodel model= new salesmonitormodel();        
         Hashtable params= new Hashtable();
 		
         Vector data= model.adquireData("icono", "http://tempuri.org#icono", params);
@@ -39,7 +39,7 @@ public class ScreenTestManager extends MainScreen
 		bmf.setImage(myImage);
 
 		add(bmf)
-        }
+        }*/
 /*		
 		VerticalFieldManager VerticalManager1 = new VerticalFieldManager(Manager.VERTICAL_SCROLL|Field.NON_FOCUSABLE){
             protected void sublayout(int width, int height) {
