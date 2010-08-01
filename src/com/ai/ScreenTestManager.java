@@ -16,13 +16,15 @@ public class ScreenTestManager extends MainScreen
 	public ScreenTestManager()
 	{
 	
-    	/*salesmonitormodel model= new salesmonitormodel();        
+    	salesmonitormodel model= new salesmonitormodel();        
         Hashtable params= new Hashtable();
-		
+	
+        try
+        {
         Vector data= model.adquireData("icono", "http://tempuri.org#icono", params);
         if(data.size()>0)
         {
-		byte[] imageBytes = (((SoapObject)data.elementAt(0) ).getProperty(0))  .getBytes("UTF-8");
+		byte[] imageBytes = (((SoapObject)data.elementAt(0) ).getProperty(0)).toString().getBytes("UTF-8");
 
 		 
 
@@ -38,8 +40,13 @@ public class ScreenTestManager extends MainScreen
 
 		bmf.setImage(myImage);
 
-		add(bmf)
-        }*/
+		add(bmf);
+        }
+        }
+        catch(Exception ex)
+        {
+        	System.out.println(ex.getMessage());
+        }
 /*		
 		VerticalFieldManager VerticalManager1 = new VerticalFieldManager(Manager.VERTICAL_SCROLL|Field.NON_FOCUSABLE){
             protected void sublayout(int width, int height) {

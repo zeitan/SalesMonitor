@@ -24,6 +24,7 @@ public class salesControllerScreen extends MainScreen
 	private String pin="";
 	private String webmethod="ventas_hoy";
 	private String webmethodDetails="ventas_hoy5hora";
+	private ConfigurationsScreen configurationsScreen;
     public salesControllerScreen(String pin) 
     {
         super();
@@ -277,6 +278,33 @@ public class salesControllerScreen extends MainScreen
     	this.clearScreen();
     	this.paintScreen();
     }
+    private void showOptionsScreen() {
+        if (null == configurationsScreen) {
+        	configurationsScreen= new ConfigurationsScreen();
+        }
+        configurationsScreen.displayOptions();
+        UiApplication.getUiApplication().pushModalScreen(configurationsScreen);
+        
+    }    
+    MenuItem refreshMenu = new MenuItem("Actualiza Ahora...", 100, 100)
+    {
+        public void run()
+        {
+        	repaintScreen();
+        }
+    };
+
+    private MenuItem coofigurationMenu = new MenuItem("Configuración",100,10) {
+        public void run() {
+            showOptionsScreen();
+        } 
+     };   
+     
+    protected void makeMenu(Menu menu, int instance)
+    {
+        menu.add(refreshMenu );
+        menu.add(coofigurationMenu );
+    }    
     	
     class RefreshScreenTask extends TimerTask
     {
