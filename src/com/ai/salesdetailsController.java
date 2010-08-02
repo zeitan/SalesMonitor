@@ -5,6 +5,7 @@ import java.util.Vector;
 import org.ksoap2.serialization.SoapObject;
 
 import net.rim.device.api.system.Bitmap;
+import net.rim.device.api.system.EncodedImage;
 import net.rim.device.api.ui.Font;
 import net.rim.device.api.ui.FontFamily;
 import net.rim.device.api.ui.Manager;
@@ -20,7 +21,7 @@ public class salesdetailsController extends MainScreen {
 	private String webmethod="ventas_hoy5hora";	
 	private int idtienda;
 	private String pin;
-	private Bitmap avatar;
+	private EncodedImage avatar;
 	public salesdetailsController (int idtienda, String pin) {
 
         super(Manager.NO_VERTICAL_SCROLL | Manager.NO_VERTICAL_SCROLLBAR);
@@ -48,7 +49,7 @@ public class salesdetailsController extends MainScreen {
 		float cantidad= ((Float)((parameter)params.get(options.getName(options.CANTIDAD))).getValue()).floatValue();
 		salesControllerScreen sc= ((salesControllerScreen)((parameter)params.get(options.getName(options.MAIN))).getValue());
 		this.pin=sc.getPin();
-		this.avatar=((Bitmap)((parameter)params.get(options.getName(options.AVATAR))).getValue());
+		this.avatar=((EncodedImage)((parameter)params.get(options.getName(options.AVATAR))).getValue());
 		this.paintScreen();
 		if (this.cantidad>cantidad)
 			sc.repaintScreen();
@@ -90,7 +91,9 @@ public class salesdetailsController extends MainScreen {
         		String fecha=((SoapObject) result.elementAt(0)).getProperty(1).toString();
         		String tienda=((SoapObject) result.elementAt(0)).getProperty(0).toString();
         		
-        		avatarPanel.add(new BitmapField(this.avatar));
+        		BitmapField bf=new BitmapField();
+        		bf.setImage(this.avatar);
+        		avatarPanel.add(bf);
         		avatarPanel.add(new LabelField(tienda));
         		mVerticalPanel.add(avatarPanel);
         		mMainPanel.add(mVerticalPanel);

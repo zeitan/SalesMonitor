@@ -17,6 +17,7 @@ import java.util.TimerTask;
 import net.rim.device.api.ui.*;
 import net.rim.device.api.ui.component.*;
 import net.rim.device.api.ui.container.*;
+import net.rim.device.api.io.Base64InputStream;
 import net.rim.device.api.system.*;
 
 public class salesControllerScreen extends MainScreen 
@@ -172,8 +173,13 @@ public class salesControllerScreen extends MainScreen
 	        		
 	        		int colorpanel=(i%2==0)?options.BLUE:options.WHITE;
 	        		int colorlabel=(i%2==0)?options.WHITE:options.BLACK;
-	        		
-	        		mVerticalPanel.add(this.buildPanel(header, details, colorpanel, colorlabel, avatar,Integer.parseInt(data.getProperty(4).toString()) ,Float.parseFloat(cantidadS),this.webmethodDetails));
+	        		byte[] imageBytes = data.getProperty(9).toString().getBytes("UTF-8");
+	        		byte[] bs = Base64InputStream.decode(imageBytes, 0, imageBytes.length);
+	        		EncodedImage myImage = EncodedImage.createEncodedImage(bs, 0, bs.length);
+	        		//BitmapField bmf = new BitmapField();
+
+	        		//bmf.setImage(myImage);	        		
+	        		mVerticalPanel.add(this.buildPanel(header, details, colorpanel, colorlabel, myImage ,Integer.parseInt(data.getProperty(4).toString()) ,Float.parseFloat(cantidadS),this.webmethodDetails));
 	        		
 	        		
 	        	}
@@ -187,12 +193,12 @@ public class salesControllerScreen extends MainScreen
         	this.add(new RichTextField(ex.getMessage()));
         }    	
     }
-    private VerticalFieldManager buildPanel(String header, String details, int colorpanel, int colorlabel, Bitmap avatar, int idtienda, float cantidad, String webmethod)
+    private VerticalFieldManager buildPanel(String header, String details, int colorpanel, int colorlabel, EncodedImage avatar, int idtienda, float cantidad, String webmethod)
     {
     	PanelHorizontalFieldManager HorizontalManager1 = new PanelHorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | USE_ALL_WIDTH );
     	HorizontalFieldManager explodeManager= new HorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | HorizontalFieldManager.FIELD_HCENTER |  HorizontalFieldManager.FIELD_VCENTER);
-		BitmapField bf=new BitmapField(avatar);
-		
+		BitmapField bf=new BitmapField();
+		bf.setImage(avatar);
 		moneylabelfield lfhead=new moneylabelfield(header,colorlabel);
 		moneylabelfield lfdetails=new moneylabelfield(details,colorlabel);
 	
