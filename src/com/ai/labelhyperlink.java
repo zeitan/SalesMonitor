@@ -1,8 +1,7 @@
 package com.ai;
-import net.rim.device.api.ui.ContextMenu;
+import java.util.Hashtable;
 import net.rim.device.api.ui.Font;
 import net.rim.device.api.ui.FontFamily;
-import net.rim.device.api.ui.MenuItem;
 import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.component.LabelField;
 
@@ -16,7 +15,7 @@ public class labelhyperlink extends LabelField {
     private int pageCount = -1;
     private float cantidad;
     private salesControllerScreen ventasmain;
-    private MenuItem mGetLinkMenuItem;
+    private Object value;    
     /**
      * 
      * @param hyperlinkLabel - label to display link
@@ -27,6 +26,13 @@ public class labelhyperlink extends LabelField {
         Font font = getBasefontSize(10);
         setFont(font.derive(Font.UNDERLINED | Font.PLAIN));        
     }
+    public labelhyperlink(parameter param) {
+        super(param.getName(), FOCUSABLE);        
+        //this.pageCount = pageCount;
+        Font font = getBasefontSize(10);
+        setFont(font.derive(Font.UNDERLINED | Font.PLAIN));
+        this.value=param.getValue();
+    } 
     public labelhyperlink(String hyperlinkLabel, int pageCount,float cantidad, salesControllerScreen main) 
     {    	
         super(hyperlinkLabel, FOCUSABLE);
@@ -35,13 +41,20 @@ public class labelhyperlink extends LabelField {
         setFont(font.derive(Font.UNDERLINED | Font.PLAIN));
         this.cantidad=cantidad;
         this.ventasmain=main;
-        //mGetLinkMenuItem = new SampleOpenScreenMenuItem(hyperlinkLabel);
-        //mGetLinkMenuItem = new SampleOpenScreenMenuItem(hyperlinkLabel,cantidad,main);
     } 
 
-    public boolean navigationClick(int status, int time)
+    public boolean navigationClick(int status, int time)    
     {
-    	UiApplication.getUiApplication().pushScreen(new salesdetailsController(pageCount,this.cantidad,this.ventasmain));
+    	switch(options.getOption(this.getText()))
+    	{
+    	 	case options.VENTASDETALLES:
+    	 		UiApplication.getUiApplication().pushScreen(new salesdetailsController((Hashtable)this.value));
+    	 	break;
+    	 	//case options.VENTASAYER:
+    	 	//	UiApplication.getUiApplication().pushScreen(new salesControllerScreen(((parameter)this.value).);
+    	 	//break;	
+    	 	
+    	}    	
     	return true;
     }
     
