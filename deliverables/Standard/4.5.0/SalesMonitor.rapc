@@ -1,9 +1,5 @@
 MIDlet-Name: SalesMonitor
-<<<<<<< HEAD
-MIDlet-Version: 0.5.1
-=======
 MIDlet-Version: 0.6.0
->>>>>>> GUIFriendly
 MIDlet-Vendor: BlackBerry Developer
 MIDlet-Jar-URL: SalesMonitor.jar
 MIDlet-Jar-Size: 0
