@@ -1,16 +1,16 @@
 Manifest-Version: 1.0
 RIM-COD-Module-Name: SalesMonitor
 RIM-COD-Module-Dependencies: net_rim_cldc,net_rim_os
-MIDlet-Jar-Size: 84460
-MIDlet-1: Monitor de Ventas,MoNeY.png,
-RIM-COD-Creation-Time: 1280881404
+MIDlet-Jar-Size: 86408
+MIDlet-1: MoNeY!,MoNeY.png,
+RIM-COD-Creation-Time: 1280976508
 MIDlet-Jar-URL: SalesMonitor.jar
 RIM-COD-URL: SalesMonitor.cod
-RIM-COD-SHA1: 1d b1 05 d1 5a 9c 27 14 d3 c1 73 4d 7c 9a 97 0a 97 cc e6 ae
-RIM-COD-Size: 58536
+RIM-COD-SHA1: 49 28 cf 5f 19 a1 09 fb 83 5e b2 ca 1e 75 47 67 cd 9a 43 76
+RIM-COD-Size: 59036
 MicroEdition-Configuration: CLDC-1.1
-MIDlet-Version: 0.6.0
+MIDlet-Version: 0.6.1
 MIDlet-Name: SalesMonitor
-MIDlet-Vendor: BlackBerry Developer
+MIDlet-Vendor: AB
 MicroEdition-Profile: MIDP-2.0
 RIM-MIDlet-Flags-1: 0

@@ -145,7 +145,21 @@ public class salesControllerScreen extends MainScreen
     		HorizontalFieldManager mMainPanel;
     		VerticalFieldManager mVerticalPanel;
     		mMainPanel = new HorizontalFieldManager();
-    		mVerticalPanel = new VerticalFieldManager(USE_ALL_HEIGHT| USE_ALL_WIDTH);
+    		mVerticalPanel = new VerticalFieldManager(USE_ALL_HEIGHT)
+    		{
+    			public int getPreferredWidth() {
+    				return getScreen().getWidth();
+    			}
+    	
+    			protected void sublayout( int maxWidth, int maxHeight ) {
+                    int myWidth = Math.min(maxWidth, getPreferredWidth());
+                    int myHeight = maxHeight;
+    				super.sublayout(myWidth, myHeight);			
+    				XYRect rec = getExtent();
+    				setExtent(myWidth , rec.height);				
+    			}
+    		}   	    		
+    		;
     		add(mMainPanel);
     		mMainPanel.add(mVerticalPanel);
     		
@@ -211,8 +225,9 @@ public class salesControllerScreen extends MainScreen
     }
     private VerticalFieldManager buildPanel(String header, String details, int colorpanel, int colorlabel, EncodedImage avatar, int idtienda, float cantidad, String webmethod)
     {
-    	PanelHorizontalFieldManager HorizontalManager1 = new PanelHorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | USE_ALL_WIDTH );
+    	PanelHorizontalFieldManager HorizontalManager1 = new PanelHorizontalFieldManager(HorizontalFieldManager.FOCUSABLE);
     	HorizontalFieldManager explodeManager= new HorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | HorizontalFieldManager.FIELD_HCENTER |  HorizontalFieldManager.FIELD_VCENTER);
+
 		BitmapField bf=new BitmapField();
 		
 		bf.setImage(avatar);
@@ -234,7 +249,21 @@ public class salesControllerScreen extends MainScreen
 		
 		HorizontalManager1.setHightlightColor(colorpanel);
 		HorizontalManager1.add(bf);
-		VerticalFieldManager textVFM=new VerticalFieldManager();
+		VerticalFieldManager textVFM=new VerticalFieldManager()
+		{
+			public int getPreferredWidth() {
+				return getScreen().getWidth()-60;
+			}
+	
+			protected void sublayout( int maxWidth, int maxHeight ) {
+                int myWidth = Math.min(maxWidth, getPreferredWidth());
+                int myHeight = maxHeight;
+				super.sublayout(myWidth, myHeight);			
+				XYRect rec = getExtent();
+				setExtent(myWidth , rec.height);				
+			}
+		}		
+		;
 		VerticalFieldManager infoVFM=new VerticalFieldManager();
 		moneyhorizontalfiedlmanager buttonManagerHF=new moneyhorizontalfiedlmanager();   
 		/*HorizontalFieldManager buttonManagerHF=new HorizontalFieldManager()
@@ -273,16 +302,19 @@ public class salesControllerScreen extends MainScreen
 		
 		params.addElement(paramLFexploit1);
 		
-		labelfieldexploit lhl=new labelfieldexploit("+", FOCUSABLE,buttonManagerHF,params, colorlabel );
+		final labelfieldexploit lhl=new labelfieldexploit("+", FOCUSABLE,buttonManagerHF,params, colorlabel );
 		Font fontexploit = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 18);
 		lhl.setFont(fontexploit.derive(Font.PLAIN));
 		
+    	//HorizontalFieldManager explodeManager= new HorizontalFieldManager();		
 		textVFM.add(lfhead);
 		textVFM.add(lfdetails);		
-		HorizontalManager1.add(textVFM);
 		
+		
+		HorizontalManager1.add(textVFM);
 		explodeManager.add(lhl);
 		HorizontalManager1.add(explodeManager);
+		
 		infoVFM.add(HorizontalManager1);
 		infoVFM.add(buttonManagerHF);
 		return infoVFM;
