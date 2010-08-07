@@ -100,6 +100,7 @@ public class salesdetailsController extends MainScreen {
         		LabelField status= new LabelField(fecha); 
         		setTitle(options.appName +"-" + options.appVersion);
                 setStatus(status);        		
+<<<<<<< HEAD
  for(int i=0; i<result.size();i++)
 {
 SoapObject data=(SoapObject) result.elementAt(i);
@@ -116,6 +117,24 @@ cantidadS=salesmonitorutility.removeBlankSpace(cantidadS);
 cantidadS=cantidadS.replace(',', '.');
 this.cantidad+=Float.valueOf(cantidadS).floatValue();
 }
+=======
+	        	for(int i=0; i<result.size();i++)
+	        	{
+	        		SoapObject data=(SoapObject) result.elementAt(i); 
+	        		String header=data.getProperty(2).toString();
+	        		String details="Ventas: "+data.getProperty(3)+" Contado:"+data.getProperty(5)+" Credito:"+data.getProperty(6)+" Devoluciones:"+data.getProperty(7)+" T.Tickets:"+data.getProperty(8);
+	        		int colorpanel=(i%2==0)?options.BLUE:options.WHITE;
+	        		int colorlabel=(i%2==0)?options.WHITE:options.BLACK;
+	        		
+	        		mVerticalPanel.add(this.buildPanel(header, details, colorpanel, colorlabel, Integer.parseInt(data.getProperty(4).toString()) ,this.webmethod));
+	        		
+	        		String cantidadS=data.getProperty(3).toString().replace('.', ' ');
+	        		cantidadS=cantidadS.trim();
+	        		cantidadS=salesmonitorutility.removeBlankSpace(cantidadS);
+	        		cantidadS=cantidadS.replace(',', '.');
+	        		this.cantidad+=Float.valueOf(cantidadS).floatValue();
+	        	}
+>>>>>>> GUIFriendly
 	        	add(mMainPanel);
         	}
         }
@@ -134,6 +153,7 @@ this.cantidad+=Float.valueOf(cantidadS).floatValue();
 		moneylabelfield lfhead=new moneylabelfield(header,colorlabel, FOCUSABLE);
 		moneylabelfield lfdetails=new moneylabelfield(details,colorlabel);
 	
+<<<<<<< HEAD
 
 		try
 		{
@@ -146,6 +166,20 @@ this.cantidad+=Float.valueOf(cantidadS).floatValue();
 		
 		
 
+=======
+
+		try
+		{
+		Font fontheader = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 12);		
+		lfhead.setFont(fontheader.derive(Font.UNDERLINED | Font.PLAIN));
+		
+		Font fontdetails = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 9);		
+
+		lfdetails.setFont(fontdetails.derive(Font.PLAIN));
+		
+		
+
+>>>>>>> GUIFriendly
 		
 		HorizontalManager1.setHightlightColor(colorpanel);
 		//HorizontalManager1.add(bf);

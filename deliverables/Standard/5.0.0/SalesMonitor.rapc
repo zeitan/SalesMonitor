@@ -1,9 +1,9 @@
 MIDlet-Name: SalesMonitor
-MIDlet-Version: 0.4.0
-MIDlet-Vendor: BlackBerry Developer
+MIDlet-Version: 0.6.1
+MIDlet-Vendor: AB
 MIDlet-Jar-URL: SalesMonitor.jar
 MIDlet-Jar-Size: 0
 MicroEdition-Profile: MIDP-2.0
 MicroEdition-Configuration: CLDC-1.1
-MIDlet-1: Monitor de Ventas,,
+MIDlet-1: MoNeY!,MoNeY.png,
 RIM-MIDlet-Flags-1: 0
