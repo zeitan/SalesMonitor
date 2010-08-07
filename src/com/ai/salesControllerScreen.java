@@ -349,7 +349,7 @@ return null;
         }
     };
 
-    private MenuItem coofigurationMenu = new MenuItem("Configuraci?n",100,10) {
+    private MenuItem coofigurationMenu = new MenuItem("Configuración",100,10) {
         public void run() {
             showOptionsScreen();
         }
