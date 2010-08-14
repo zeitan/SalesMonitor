@@ -193,22 +193,7 @@ byte[] imageBytes = data.getProperty(9).toString().getBytes("UTF-8");
 byte[] bs = Base64InputStream.decode(imageBytes, 0, imageBytes.length);
 EncodedImage myImage = EncodedImage.createEncodedImage(bs, 0, bs.length);
 
-/*int currentWidthFixed32 = Fixed32.toFP(myImage .getWidth());
-int currentHeightFixed32 = Fixed32.toFP(myImage .getHeight());
 
-int width = myImage .getWidth() /1;
-int height = myImage .getHeight() /1;
-
-
-int requiredWidthFixed32 = Fixed32.toFP(width);
-int requiredHeightFixed32 = Fixed32.toFP(height);
-
-int scaleXFixed32 = Fixed32.div(currentWidthFixed32, requiredWidthFixed32);
-int scaleYFixed32 = Fixed32.div(currentHeightFixed32, requiredHeightFixed32);
-EncodedImage temp = myImage.scaleImage32(scaleXFixed32, scaleYFixed32);*/
-//BitmapField bmf = new BitmapField();
-
-//bmf.setImage(myImage);
 mVerticalPanel.add(this.buildPanel(header, details, colorpanel, colorlabel, myImage,Integer.parseInt(data.getProperty(4).toString()) ,Float.parseFloat(cantidadS),this.webmethodDetails));
 
 
@@ -228,32 +213,32 @@ mVerticalPanel.add(this.buildPanel(header, details, colorpanel, colorlabel, myIm
      PanelHorizontalFieldManager HorizontalManager1 = new PanelHorizontalFieldManager(HorizontalFieldManager.FOCUSABLE);
      HorizontalFieldManager explodeManager= new HorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | HorizontalFieldManager.FIELD_HCENTER | HorizontalFieldManager.FIELD_VCENTER);
 
-BitmapField bf=new BitmapField();
-
-bf.setImage(avatar);
-moneylabelfield lfhead=new moneylabelfield(header,colorlabel);
-moneylabelfield lfdetails=new moneylabelfield(details,colorlabel);
-
-
-try
-{
-Font fontheader = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 12);
-lfhead.setFont(fontheader.derive(Font.UNDERLINED | Font.PLAIN));
-
-Font fontdetails = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 9);
-
-lfdetails.setFont(fontdetails.derive(Font.PLAIN));
+	BitmapField bf=new BitmapField();
+	
+	bf.setImage(avatar);
+	moneylabelfield lfhead=new moneylabelfield(header,colorlabel);
+	moneylabelfield lfdetails=new moneylabelfield(details,colorlabel);
 
 
-
-
-HorizontalManager1.setHightlightColor(colorpanel);
-HorizontalManager1.add(bf);
-VerticalFieldManager textVFM=new VerticalFieldManager()
-{
-public int getPreferredWidth() {
-return getScreen().getWidth()-60;
-}
+	try
+	{
+		Font fontheader = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 14);
+		lfhead.setFont(fontheader.derive(Font.UNDERLINED | Font.PLAIN));
+		
+		Font fontdetails = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 10);
+		
+		lfdetails.setFont(fontdetails.derive(Font.PLAIN));
+	
+	
+	
+	
+	HorizontalManager1.setHightlightColor(colorpanel);
+	HorizontalManager1.add(bf);
+	VerticalFieldManager textVFM=new VerticalFieldManager()
+	{
+	public int getPreferredWidth() {
+	return getScreen().getWidth()-60;
+	}
 
 protected void sublayout( int maxWidth, int maxHeight ) {
                 int myWidth = Math.min(maxWidth, getPreferredWidth());

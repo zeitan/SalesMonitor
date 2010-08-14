@@ -137,10 +137,10 @@ moneylabelfield lfdetails=new moneylabelfield(details,colorlabel);
 
 try
 {
-Font fontheader = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 12);
+Font fontheader = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 14);
 lfhead.setFont(fontheader.derive(Font.UNDERLINED | Font.PLAIN));
 
-Font fontdetails = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 9);
+Font fontdetails = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 10);
 
 lfdetails.setFont(fontdetails.derive(Font.PLAIN));
 
