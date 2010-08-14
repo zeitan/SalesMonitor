@@ -1,13 +1,15 @@
 <Properties ModelVersion="1.1.2">
-  <General Title="Monitor de Ventas" Version="0.5.1" Vendor="AI" Description=""/>
+  <General Title="MoNeY!" Version="0.7.0" Vendor="AB" Description=""/>
   <Application Type="BlackBerry Application" MainMIDletName="" MainArgs="" HomeScreenPosition="0" StartupTier="7" IsSystemModule="false" IsAutostartup="false"/>
   <Resources hasTitleResource="false" TitleResourceBundleName="" TitleResourceBundleRelativePath="" TitleResourceBundleClassName="" TitleResourceBundleKey="" DescriptionId="">
-    <Icons/>
+    <Icons>
+      <Icon CanonicalFileName="MoNeY.png" IsFocus="false"/>
+    </Icons>
   </Resources>
   <Compile OutputCompilerMessages="false" ConvertImages="false" CreateWarningForNoExportedRoutine="true" CompressResources="false" AliasList="">
     <PreprocessorDefines/>
   </Compile>
-  <Packaging OutputFileName="SalesMonitor" OutputFolder="deliverables" PreBuildStep="" PostBuildStep="" CleanStep="" GenerateALXFile="true">
+  <Packaging OutputFileName="MoNeY" OutputFolder="deliverables" PreBuildStep="" PostBuildStep="" CleanStep="" GenerateALXFile="true">
     <AlxFiles/>
   </Packaging>
   <HiddenProperties>

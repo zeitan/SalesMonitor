@@ -1,0 +1,31 @@
+<loader version="1.0">
+	<application id="MoNeY">
+		<name >
+			MoNeY!
+		</name>
+		<description >
+			
+		</description>
+		<version >
+			0.7.0
+		</version>
+		<vendor >
+			AB
+		</vendor>
+		<copyright >
+			Copyright (c) 2010 AB
+		</copyright>
+		<fileset Java="1.49" _blackberryVersion="[4.5.0)">
+			<directory >
+				4.5.0
+			</directory>
+			<files >
+				MoNeY.cod
+
+			</files>
+
+		</fileset>
+
+	</application>
+
+</loader>

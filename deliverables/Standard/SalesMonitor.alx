@@ -1,12 +1,13 @@
 <loader version="1.0">
 	<application id="SalesMonitor">
 		<name >
-			Monitor de Ventas
+			MoNeY!
 		</name>
 		<description >
 			
 		</description>
 		<version >
+<<<<<<< HEAD
 			0.5.1
 		</version>
 		<vendor >
@@ -14,6 +15,15 @@
 		</vendor>
 		<copyright >
 			Copyright (c) 2010 AI
+=======
+			0.6.1
+		</version>
+		<vendor >
+			AB
+		</vendor>
+		<copyright >
+			Copyright (c) 2010 AB
+>>>>>>> development
 		</copyright>
 		<fileset Java="1.49" _blackberryVersion="[4.5.0,4.5.1)">
 			<directory >

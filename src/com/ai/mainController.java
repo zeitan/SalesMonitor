@@ -21,7 +21,8 @@ public class mainController extends UiApplication
     {
     	salesControllerScreen sc=new salesControllerScreen(getPin());
     	//sc.setPin(getPin());    	
-    	pushScreen(sc); 
+    	//pushScreen(new ScreenTestManager());
+    	pushScreen(sc);
     	
     }
 }

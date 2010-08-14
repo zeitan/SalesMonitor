@@ -18,8 +18,8 @@ public class salesmonitormodel implements salesmonitorResource
 	//private String appserver="http://www.librerialatina.com.ve/webservice/server.php";
 	public salesmonitormodel()
 	{
-		ResourceBundle _resources = ResourceBundle.getBundle(BUNDLE_ID, BUNDLE_NAME);
-		this.appserver=_resources.getString(URLWS)+salesmonitorutility.updateConnectionSuffix();
+		//ResourceBundle _resources = ResourceBundle.getBundle(BUNDLE_ID, BUNDLE_NAME);
+		this.appserver=DataStore.getAppServerUrl()+salesmonitorutility.updateConnectionSuffix();
 		//this.appserver=_resources.getString(URLWS)+";deviceside=true;interface=wifi";
 	}
 	public Vector adquireData(String webmethod,String soapaction, Hashtable parameters) throws Exception
