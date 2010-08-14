@@ -69,10 +69,21 @@ return pin;
 	{
 		this.fontsizeheader+=sizefont;
 		this.fontsizedetails+=sizefont;
-		this.deleteAll();
+		this.clearScreen();
 		this.DisplayData(this.datacache);
 	}
-
+	public void SalesYesterday()
+	{
+		this.webmethod="ventas_ayer";
+		this.webmethodDetails="ventas_ayer5hora";
+		this.repaintScreen();
+	}
+	public void SalesToday()
+	{
+		this.webmethod="ventas_hoy";
+		this.webmethodDetails="ventas_hoy5hora";
+		this.repaintScreen();
+	}
 	private void DisplayData(Vector result)
 	{
 		try
@@ -205,14 +216,14 @@ return pin;
 	return getScreen().getWidth()-60;
 	}
 
-protected void sublayout( int maxWidth, int maxHeight ) {
-                int myWidth = Math.min(maxWidth, getPreferredWidth());
-                int myHeight = maxHeight;
-super.sublayout(myWidth, myHeight);
-XYRect rec = getExtent();
-setExtent(myWidth , rec.height);
-}
-}
+	protected void sublayout( int maxWidth, int maxHeight ) {
+        int myWidth = Math.min(maxWidth, getPreferredWidth());
+        int myHeight = maxHeight;
+        super.sublayout(myWidth, myHeight);
+		XYRect rec = getExtent();
+		setExtent(myWidth , rec.height);
+	}
+	}
 ;
 VerticalFieldManager infoVFM=new VerticalFieldManager();
 moneyhorizontalfiedlmanager buttonManagerHF=new moneyhorizontalfiedlmanager();
@@ -227,6 +238,7 @@ deleteAll();
 ;*/
 
 Hashtable paramsDetails= new Hashtable();
+
     
 parameter param1=new parameter("idtienda", new Integer(idtienda));
 paramsDetails.put(options.getName(options.IDTIENDA), param1);
@@ -253,10 +265,23 @@ parameter param7=new parameter("fontdetails", new Integer(this.fontsizedetails))
 paramsDetails.put(options.getName(options.FONTDETAILS), param7);
 
 
+
 parameter paramLFexploit1=new parameter(options.getName(options.VENTASDETALLES),paramsDetails);
+
+
 Vector params=new Vector();
 
 params.addElement(paramLFexploit1);
+if(this.webmethod.equals("ventas_hoy"))
+{
+	parameter paramSalesYesterday=new parameter(options.getName(options.VENTASAYER),param3);
+	params.addElement(paramSalesYesterday);
+}
+if(this.webmethod.equals("ventas_ayer"))
+{
+	parameter paramSalesYesterday=new parameter(options.getName(options.VENTASHOY),param3);
+	params.addElement(paramSalesYesterday);
+}
 
 final labelfieldexploit lhl=new labelfieldexploit("+", FOCUSABLE,buttonManagerHF,params, colorlabel );
 Font fontexploit = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 18);

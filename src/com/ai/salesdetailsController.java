@@ -104,24 +104,24 @@ private void paintScreen()
          LabelField status= new LabelField(fecha);
          setTitle(options.appName +"-" + options.appVersion);
                 setStatus(status);
-for(int i=0; i<result.size();i++)
-{
-SoapObject data=(SoapObject) result.elementAt(i);
-String header=data.getProperty(2).toString();
-String details="Ventas: "+data.getProperty(3)+" Contado:"+data.getProperty(5)+" Credito:"+data.getProperty(6)+" Devoluciones:"+data.getProperty(7)+" T.Tickets:"+data.getProperty(8);
-int colorpanel=(i%2==0)?options.BLUE:options.WHITE;
-int colorlabel=(i%2==0)?options.WHITE:options.BLACK;
-
-mVerticalPanel.add(this.buildPanel(header, details, colorpanel, colorlabel, Integer.parseInt(data.getProperty(4).toString()) ,this.webmethod));
-
-String cantidadS=data.getProperty(3).toString().replace('.', ' ');
-cantidadS=cantidadS.trim();
-cantidadS=salesmonitorutility.removeBlankSpace(cantidadS);
-cantidadS=cantidadS.replace(',', '.');
-this.cantidad+=Float.valueOf(cantidadS).floatValue();
-}
-add(mMainPanel);
-         }
+		for(int i=0; i<result.size();i++)
+		{
+			SoapObject data=(SoapObject) result.elementAt(i);
+			String header=data.getProperty(2).toString();
+			String details="Ventas: "+data.getProperty(3)+" Contado:"+data.getProperty(5)+" Credito:"+data.getProperty(6)+" Devoluciones:"+data.getProperty(7)+" T.Tickets:"+data.getProperty(8);
+			int colorpanel=(i%2==0)?options.BLUE:options.WHITE;
+			int colorlabel=(i%2==0)?options.WHITE:options.BLACK;
+			
+			mVerticalPanel.add(this.buildPanel(header, details, colorpanel, colorlabel, Integer.parseInt(data.getProperty(4).toString()) ,this.webmethod));
+			
+			String cantidadS=data.getProperty(3).toString().replace('.', ' ');
+			cantidadS=cantidadS.trim();
+			cantidadS=salesmonitorutility.removeBlankSpace(cantidadS);
+			cantidadS=cantidadS.replace(',', '.');
+			this.cantidad+=Float.valueOf(cantidadS).floatValue();
+		}
+		add(mMainPanel);
+        }
         }
         catch(Exception ex)
         {
@@ -129,13 +129,13 @@ add(mMainPanel);
         }
 
 }
-    private HorizontalFieldManager buildPanel(String header, String details, int colorpanel, int colorlabel, int idtienda, String webmethod)
+private VerticalFieldManager buildPanel(String header, String details, int colorpanel, int colorlabel, int idtienda, String webmethod)
     {
      PanelHorizontalFieldManager HorizontalManager1 = new PanelHorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | USE_ALL_WIDTH );
-     //HorizontalFieldManager explodeManager= new HorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | HorizontalFieldManager.FIELD_HCENTER | HorizontalFieldManager.FIELD_VCENTER);
+     HorizontalFieldManager explodeManager= new HorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | HorizontalFieldManager.FIELD_HCENTER | HorizontalFieldManager.FIELD_VCENTER);
 //BitmapField bf=new BitmapField(avatar);
 
-moneylabelfield lfhead=new moneylabelfield(header,colorlabel, FOCUSABLE);
+moneylabelfield lfhead=new moneylabelfield(header,colorlabel);
 moneylabelfield lfdetails=new moneylabelfield(details,colorlabel);
 
 
@@ -154,44 +154,32 @@ lfdetails.setFont(fontdetails.derive(Font.PLAIN));
 HorizontalManager1.setHightlightColor(colorpanel);
 //HorizontalManager1.add(bf);
 VerticalFieldManager textVFM=new VerticalFieldManager();
-//VerticalFieldManager infoVFM=new VerticalFieldManager();
-//moneyhorizontalfiedlmanager buttonManagerHF=new moneyhorizontalfiedlmanager();
-/*HorizontalFieldManager buttonManagerHF=new HorizontalFieldManager()
-{
-protected void onUnfocus() {
-super.onUnfocus();
-deleteAll();
-}
-}
-;*/
-/*
-Hashtable paramsDetails= new Hashtable();
-parameter param1=new parameter("idtienda", new Integer(idtienda));
-paramsDetails.put(options.getName(options.IDTIENDA), param1);
-parameter param2=new parameter("cantidad", new Float(cantidad));
-paramsDetails.put(options.getName(options.CANTIDAD), param2);
-
-parameter param3=new parameter("salesmainScreen", this);
-paramsDetails.put(options.getName(options.MAIN), param3);
-parameter param4=new parameter("webmethod", webmethod);
-paramsDetails.put(options.getName(options.WEBMETHOD), param4);
-
-parameter paramLFexploit1=new parameter(options.getName(options.VENTASDETALLES),paramsDetails);
-Vector params=new Vector();
-params.addElement(paramLFexploit1);
-labelfieldexploit lhl=new labelfieldexploit("+", FOCUSABLE,buttonManagerHF,params, colorlabel );
-Font fontexploit = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 18);
-lhl.setFont(fontexploit.derive(Font.PLAIN));*/
+VerticalFieldManager infoVFM=new VerticalFieldManager();
+moneyhorizontalfiedlmanager buttonManagerHF=new moneyhorizontalfiedlmanager();
 
 textVFM.add(lfhead);
 textVFM.add(lfdetails);
 HorizontalManager1.add(textVFM);
+Vector params=new Vector();
+if(this.webmethod.equals("ventas_hoy5hora"))
+{
+	parameter paramSalesYesterday=new parameter(options.getName(options.VENTASAYER),this);
+	params.addElement(paramSalesYesterday);
+}
+if(this.webmethod.equals("ventas_ayer5hora"))
+{
+	parameter paramSalesYesterday=new parameter(options.getName(options.VENTASHOY),this);
+	params.addElement(paramSalesYesterday);
+}
 
-//explodeManager.add(lhl);
-//HorizontalManager1.add(explodeManager);
-//infoVFM.add(HorizontalManager1);
-//infoVFM.add(buttonManagerHF);
-return HorizontalManager1;
+final labelfieldexploit lhl=new labelfieldexploit("+", FOCUSABLE,buttonManagerHF,params, colorlabel );
+Font fontexploit = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 18);
+lhl.setFont(fontexploit.derive(Font.PLAIN));
+explodeManager.add(lhl);
+HorizontalManager1.add(explodeManager);
+infoVFM.add(HorizontalManager1);
+infoVFM.add(buttonManagerHF);
+return infoVFM;
 //mVerticalPanel.add(infoVFM);
 //this.add(mVerticalPanel);
 }

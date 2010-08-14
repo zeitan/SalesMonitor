@@ -4,6 +4,7 @@ import net.rim.device.api.ui.Font;
 import net.rim.device.api.ui.FontFamily;
 import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.component.LabelField;
+import net.rim.device.api.ui.container.PopupScreen;
 
 /**
  * 
@@ -50,6 +51,34 @@ public class labelhyperlink extends LabelField {
     	 	case options.VENTASDETALLES:
     	 		UiApplication.getUiApplication().pushScreen(new salesdetailsController((Hashtable)this.value));
     	 	break;
+    	 	case options.VENTASAYER:    	 		
+    	 		try
+    	 		{
+    	 			parameter param=(parameter)this.value;
+    	 			salesControllerScreen sc=(salesControllerScreen)param.getValue();
+    	 			sc.SalesYesterday();
+    	 		}
+    	 		catch(ClassCastException ex)
+    	 		{
+    	 			UiApplication.getUiApplication().popScreen((salesdetailsController)this.value);
+    	 			salesControllerScreen sc=(salesControllerScreen)UiApplication.getUiApplication().getActiveScreen();
+    	 			sc.SalesYesterday();
+    	 		}
+    	 	break;
+    	 	case options.VENTASHOY:    	 		
+    	 		try
+    	 		{
+    	 			parameter param1=(parameter)this.value;
+    	 			salesControllerScreen sc=(salesControllerScreen)param1.getValue();
+    	 			sc.SalesToday();
+    	 		}
+    	 		catch(ClassCastException ex)
+    	 		{
+    	 			UiApplication.getUiApplication().popScreen((salesdetailsController)this.value);
+    	 			salesControllerScreen sc=(salesControllerScreen)UiApplication.getUiApplication().getActiveScreen();
+    	 			sc.SalesToday();
+    	 		}    	 		
+    	 	break;    	 	
     	 	//case options.VENTASAYER:
     	 	//	UiApplication.getUiApplication().pushScreen(new salesControllerScreen(((parameter)this.value).);
     	 	//break;	

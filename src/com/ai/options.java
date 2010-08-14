@@ -20,6 +20,7 @@ public class options
 	final static int AVATAR=13;
 	final static int FONTHEADER=14;
 	final static int FONTDETAILS=15;
+
 	
 	final static int BLUE=1799612;
 	final static int WHITE=16777215;
