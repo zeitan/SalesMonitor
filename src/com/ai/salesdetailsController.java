@@ -22,6 +22,8 @@ private String webmethod="ventas_hoy5hora";
 private int idtienda;
 private String pin;
 private EncodedImage avatar;
+private int fontsizeheader=14;
+private int fontsizedetails=10;
 public salesdetailsController (int idtienda, String pin) {
 
         super(Manager.NO_VERTICAL_SCROLL | Manager.NO_VERTICAL_SCROLLBAR);
@@ -50,6 +52,8 @@ float cantidad= ((Float)((parameter)params.get(options.getName(options.CANTIDAD)
 salesControllerScreen sc= ((salesControllerScreen)((parameter)params.get(options.getName(options.MAIN))).getValue());
 this.pin=sc.getPin();
 this.avatar=((EncodedImage)((parameter)params.get(options.getName(options.AVATAR))).getValue());
+this.fontsizeheader=((Integer)((parameter)params.get(options.getName(options.FONTHEADER))).getValue()).intValue();
+this.fontsizedetails=((Integer)((parameter)params.get(options.getName(options.FONTDETAILS))).getValue()).intValue();
 this.paintScreen();
 if (this.cantidad>cantidad)
 sc.repaintScreen();
@@ -137,10 +141,10 @@ moneylabelfield lfdetails=new moneylabelfield(details,colorlabel);
 
 try
 {
-Font fontheader = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 14);
+Font fontheader = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, this.fontsizeheader);
 lfhead.setFont(fontheader.derive(Font.UNDERLINED | Font.PLAIN));
 
-Font fontdetails = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 10);
+Font fontdetails = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, this.fontsizedetails);
 
 lfdetails.setFont(fontdetails.derive(Font.PLAIN));
 

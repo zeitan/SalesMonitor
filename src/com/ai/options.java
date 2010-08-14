@@ -18,6 +18,8 @@ public class options
 	final static int CANTIDAD=11;
 	final static int VENTASRANGO=12;
 	final static int AVATAR=13;
+	final static int FONTHEADER=14;
+	final static int FONTDETAILS=15;
 	
 	final static int BLUE=1799612;
 	final static int WHITE=16777215;
@@ -54,6 +56,10 @@ public class options
 				return "Ventas Rango";	
 			case AVATAR:
 				return "Avatar";	
+			case FONTHEADER:
+				return "Font header";	
+			case FONTDETAILS:
+				return "Font details";	
 				
 		}
 		return "";
@@ -73,6 +79,8 @@ public class options
 		if (option.equals("Cantidad")) return FECHAHASTA;
 		if (option.equals("Ventas Rango")) return VENTASRANGO;
 		if (option.equals("Avatar")) return AVATAR;
+		if (option.equals("Font header")) return FONTHEADER;
+		if (option.equals("Font details")) return FONTDETAILS;
 		return -1;
 	}	
 	 
