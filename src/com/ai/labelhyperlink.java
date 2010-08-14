@@ -42,6 +42,7 @@ public class labelhyperlink extends LabelField {
         setFont(font.derive(Font.UNDERLINED | Font.PLAIN));
         this.cantidad=cantidad;
         this.ventasmain=main;
+    }    
     public boolean navigationClick(int status, int time)    
     {
     	switch(options.getOption(this.getText()))

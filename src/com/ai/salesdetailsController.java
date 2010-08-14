@@ -129,9 +129,9 @@ add(mMainPanel);
          add(new RichTextField(ex.getMessage()));
         }
 
-     }
+   }
 
-}
+
     private HorizontalFieldManager buildPanel(String header, String details, int colorpanel, int colorlabel, int idtienda, String webmethod)
     {
      PanelHorizontalFieldManager HorizontalManager1 = new PanelHorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | USE_ALL_WIDTH );

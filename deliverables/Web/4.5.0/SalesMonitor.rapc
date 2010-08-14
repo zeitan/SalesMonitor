@@ -1,9 +1,0 @@
-MIDlet-Name: SalesMonitor
-MIDlet-Version: 0.5.1
-MIDlet-Vendor: AI
-MIDlet-Jar-URL: SalesMonitor.jar
-MIDlet-Jar-Size: 0
-MicroEdition-Profile: MIDP-2.0
-MicroEdition-Configuration: CLDC-1.1
-MIDlet-1: Monitor de Ventas,,
-RIM-MIDlet-Flags-1: 0
