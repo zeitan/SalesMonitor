@@ -22,8 +22,8 @@ private String webmethod="ventas_hoy5hora";
 private int idtienda;
 private String pin;
 private EncodedImage avatar;
-private int fontsizeheader=14;
-private int fontsizedetails=10;
+private int fontsizeheader=DataStore.getFontHeaderSize();
+private int fontsizedetails=DataStore.getFontDetailsSize();
 public salesdetailsController (int idtienda, String pin) {
 
         super(Manager.NO_VERTICAL_SCROLL | Manager.NO_VERTICAL_SCROLLBAR);

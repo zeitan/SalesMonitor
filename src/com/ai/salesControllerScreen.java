@@ -28,8 +28,8 @@ private String pin="";
 private String webmethod="ventas_hoy";
 private String webmethodDetails="ventas_hoy5hora";
 private ConfigurationsScreen configurationsScreen;
-private int fontsizeheader=14;
-private int fontsizedetails=10;
+private int fontsizeheader=DataStore.getFontHeaderSize();
+private int fontsizedetails=DataStore.getFontDetailsSize();
 private Vector datacache=null;
     public salesControllerScreen(String pin)
     {
@@ -71,6 +71,8 @@ return pin;
 		this.fontsizedetails+=sizefont;
 		this.clearScreen();
 		this.DisplayData(this.datacache);
+		DataStore.setFontHeaderSize(fontsizeheader);
+		DataStore.setFontDetailsSize(fontsizedetails);
 	}
 	public void SalesYesterday()
 	{
@@ -187,7 +189,7 @@ return pin;
     private VerticalFieldManager buildPanel(String header, String details, int colorpanel, int colorlabel, EncodedImage avatar, int idtienda, float cantidad, String webmethod)
     {
      PanelHorizontalFieldManager HorizontalManager1 = new PanelHorizontalFieldManager(HorizontalFieldManager.FOCUSABLE);
-     HorizontalFieldManager explodeManager= new HorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | HorizontalFieldManager.FIELD_HCENTER | HorizontalFieldManager.FIELD_VCENTER);
+     HorizontalFieldManager explodeManager= new HorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | HorizontalFieldManager.FIELD_HCENTER | HorizontalFieldManager.FIELD_VCENTER);     
 
 	BitmapField bf=new BitmapField();
 	
@@ -354,7 +356,8 @@ return null;
      
     protected void makeMenu(Menu menu, int instance)
     {
-        menu.add(refreshMenu );
+    	if(this.webmethod.equals("ventas_hoy"))
+    		menu.add(refreshMenu );
         menu.add(coofigurationMenu );
         menu.add(FontPlusMenu );
         menu.add(FontMinusMenu );        

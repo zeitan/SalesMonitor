@@ -11,11 +11,14 @@ class DataStore implements salesmonitorResource {
    private LongHashtableCollection  settings;
    
    private static final long KEY_APP_SRV_URL = 0;   
+   private static final long KEY_APP_FONT_HEADER_SIZE = 1;
+   private static final long KEY_APP_FONT_DETAILS_SIZE = 2;   
    private static ResourceBundle _resources = ResourceBundle.getBundle(BUNDLE_ID, BUNDLE_NAME);
         
    
    private static String DEFAULT_SERVICE_URL = _resources.getString(URLWS);
-
+   private static int DEFAULT_FONT_HEADER_SIZE = 14;
+   private static int DEFAULT_FONT_DETAILS_SIZE = 10;
    
    private static DataStore getInstance() {
         if (null == instance) {
@@ -36,7 +39,36 @@ class DataStore implements salesmonitorResource {
        }
        return url;
     }
-   
+    public static int getFontHeaderSize() {
+        Integer fontHSize = ((Integer)getInstance().get(KEY_APP_FONT_HEADER_SIZE));
+        int fontheadsize;
+        if (null == fontHSize ) {
+          fontheadsize =  DEFAULT_FONT_HEADER_SIZE; 
+          setFontHeaderSize(fontheadsize );
+        }
+        else
+        	fontheadsize=fontHSize.intValue(); 
+        return fontheadsize;
+     }
+    public static void setFontHeaderSize(int fontheadsize ) {
+        getInstance().set(KEY_APP_FONT_HEADER_SIZE, new Integer(fontheadsize) );
+     } 
+
+    public static int getFontDetailsSize() {
+        Integer fontDSize = ((Integer)getInstance().get(KEY_APP_FONT_DETAILS_SIZE));
+        int fontdetailsize;
+        if (null == fontDSize ) {
+        	fontdetailsize=  DEFAULT_FONT_DETAILS_SIZE; 
+          setFontDetailsSize(fontdetailsize);
+        }
+        else
+        	fontdetailsize=fontDSize.intValue(); 
+        return fontdetailsize;
+     }
+    public static void setFontDetailsSize(int fontdetailsize ) {
+        getInstance().set(KEY_APP_FONT_DETAILS_SIZE, new Integer(fontdetailsize ) );
+     }    
+    
     public static void setAppServerUrl(String url) {
        getInstance().set(KEY_APP_SRV_URL,url);
     } 
