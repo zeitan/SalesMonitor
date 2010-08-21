@@ -59,6 +59,7 @@ if (this.cantidad>cantidad)
 sc.repaintScreen();
 
 }
+
 private void paintScreen()
 {
         salesmonitormodel model= new salesmonitormodel();
@@ -131,63 +132,75 @@ private void paintScreen()
 }
 private VerticalFieldManager buildPanel(String header, String details, int colorpanel, int colorlabel, int idtienda, String webmethod)
     {
-     PanelHorizontalFieldManager HorizontalManager1 = new PanelHorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | USE_ALL_WIDTH );
-     HorizontalFieldManager explodeManager= new HorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | HorizontalFieldManager.FIELD_HCENTER | HorizontalFieldManager.FIELD_VCENTER);
+	     PanelHorizontalFieldManager HorizontalManager1 = new PanelHorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | USE_ALL_WIDTH );
+	     HorizontalFieldManager explodeManager= new HorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | HorizontalFieldManager.FIELD_HCENTER | HorizontalFieldManager.FIELD_VCENTER);
 //BitmapField bf=new BitmapField(avatar);
 
-moneylabelfield lfhead=new moneylabelfield(header,colorlabel);
-moneylabelfield lfdetails=new moneylabelfield(details,colorlabel);
-
-
-try
-{
-Font fontheader = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, this.fontsizeheader);
-lfhead.setFont(fontheader.derive(Font.UNDERLINED | Font.PLAIN));
-
-Font fontdetails = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, this.fontsizedetails);
-
-lfdetails.setFont(fontdetails.derive(Font.PLAIN));
-
-
-
-
-HorizontalManager1.setHightlightColor(colorpanel);
-//HorizontalManager1.add(bf);
-VerticalFieldManager textVFM=new VerticalFieldManager();
-VerticalFieldManager infoVFM=new VerticalFieldManager();
-moneyhorizontalfiedlmanager buttonManagerHF=new moneyhorizontalfiedlmanager();
-
-textVFM.add(lfhead);
-textVFM.add(lfdetails);
-HorizontalManager1.add(textVFM);
-Vector params=new Vector();
-if(this.webmethod.equals("ventas_hoy5hora"))
-{
-	parameter paramSalesYesterday=new parameter(options.getName(options.VENTASAYER),this);
-	params.addElement(paramSalesYesterday);
-}
-if(this.webmethod.equals("ventas_ayer5hora"))
-{
-	parameter paramSalesYesterday=new parameter(options.getName(options.VENTASHOY),this);
-	params.addElement(paramSalesYesterday);
-}
-
-final labelfieldexploit lhl=new labelfieldexploit("+", FOCUSABLE,buttonManagerHF,params, colorlabel );
-Font fontexploit = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 18);
-lhl.setFont(fontexploit.derive(Font.PLAIN));
-explodeManager.add(lhl);
-HorizontalManager1.add(explodeManager);
-infoVFM.add(HorizontalManager1);
-infoVFM.add(buttonManagerHF);
-return infoVFM;
-//mVerticalPanel.add(infoVFM);
-//this.add(mVerticalPanel);
-}
-catch(Exception ex)
-{
-System.out.println(ex.getMessage());
-return null;
-}
+		moneylabelfield lfhead=new moneylabelfield(header,colorlabel);
+		moneylabelfield lfdetails=new moneylabelfield(details,colorlabel);
+		
+		
+		try
+		{
+		Font fontheader = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, this.fontsizeheader);
+		lfhead.setFont(fontheader.derive(Font.UNDERLINED | Font.PLAIN));
+		
+		Font fontdetails = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, this.fontsizedetails);
+		
+		lfdetails.setFont(fontdetails.derive(Font.PLAIN));
+		
+		
+		
+		
+		HorizontalManager1.setHightlightColor(colorpanel);
+		//HorizontalManager1.add(bf);
+		VerticalFieldManager textVFM=new VerticalFieldManager();
+		VerticalFieldManager infoVFM=new VerticalFieldManager();
+		moneyhorizontalfiedlmanager buttonManagerHF=new moneyhorizontalfiedlmanager();
+		
+		textVFM.add(lfhead);
+		textVFM.add(lfdetails);
+		HorizontalManager1.add(textVFM);
+		Vector params=new Vector();
+		if(this.webmethod.equals("ventas_hoy5hora"))
+		{
+			parameter paramSalesYesterday=new parameter(options.getName(options.VENTASAYER),this);
+			params.addElement(paramSalesYesterday);
+			parameter paramSalesWeek=new parameter(options.getName(options.VENTASSEMANA),this);
+			params.addElement(paramSalesWeek);		
+			parameter param1=new parameter("idtienda", new Integer(idtienda));
+			params.addElement(param1);
+			
+		}
+		if(this.webmethod.equals("ventas_ayer5hora"))
+		{
+			parameter paramSalesYesterday=new parameter(options.getName(options.VENTASHOY),this);
+			params.addElement(paramSalesYesterday);
+			parameter paramSalesWeek=new parameter(options.getName(options.VENTASSEMANA),this);
+			params.addElement(paramSalesWeek);
+			parameter param1=new parameter("idtienda", new Integer(idtienda));
+			params.addElement(param1);		
+		}
+		
+		
+		
+		
+		final labelfieldexploit lhl=new labelfieldexploit("+", FOCUSABLE,buttonManagerHF,params, colorlabel );
+		Font fontexploit = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, 18);
+		lhl.setFont(fontexploit.derive(Font.PLAIN));
+		explodeManager.add(lhl);
+		HorizontalManager1.add(explodeManager);
+		infoVFM.add(HorizontalManager1);
+		infoVFM.add(buttonManagerHF);
+		return infoVFM;
+		//mVerticalPanel.add(infoVFM);
+		//this.add(mVerticalPanel);
+		}
+		catch(Exception ex)
+		{
+		System.out.println(ex.getMessage());
+		return null;
+		}
 
     }
 }

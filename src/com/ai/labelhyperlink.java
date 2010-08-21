@@ -13,8 +13,15 @@ import net.rim.device.api.ui.container.PopupScreen;
  */
 public class labelhyperlink extends LabelField {
 
-    private int pageCount = -1;
-    private float cantidad;
+    private int idtienda = -1;
+    public void setIdtienda(int idtienda) 
+    {
+		this.idtienda = idtienda;
+	}
+
+
+
+	private float cantidad;
     private salesControllerScreen ventasmain;
     private Object value;    
     /**
@@ -23,7 +30,7 @@ public class labelhyperlink extends LabelField {
      */    
     public labelhyperlink(String hyperlinkLabel, int pageCount) {
         super(hyperlinkLabel, FOCUSABLE);
-        this.pageCount = pageCount;
+        this.idtienda  = pageCount;
         Font font = getBasefontSize(10);
         setFont(font.derive(Font.UNDERLINED | Font.PLAIN));        
     }
@@ -37,7 +44,7 @@ public class labelhyperlink extends LabelField {
     public labelhyperlink(String hyperlinkLabel, int pageCount,float cantidad, salesControllerScreen main) 
     {    	
         super(hyperlinkLabel, FOCUSABLE);
-        this.pageCount = pageCount;
+        this.idtienda = pageCount;
         Font font = getBasefontSize(10);
         setFont(font.derive(Font.UNDERLINED | Font.PLAIN));
         this.cantidad=cantidad;
@@ -56,12 +63,14 @@ public class labelhyperlink extends LabelField {
     	 		{
     	 			parameter param=(parameter)this.value;
     	 			salesControllerScreen sc=(salesControllerScreen)param.getValue();
+    	 			sc.setId(this.idtienda);
     	 			sc.SalesYesterday();
     	 		}
     	 		catch(ClassCastException ex)
     	 		{
     	 			UiApplication.getUiApplication().popScreen((salesdetailsController)this.value);
     	 			salesControllerScreen sc=(salesControllerScreen)UiApplication.getUiApplication().getActiveScreen();
+    	 			sc.setId(this.idtienda);
     	 			sc.SalesYesterday();
     	 		}
     	 	break;
@@ -70,13 +79,47 @@ public class labelhyperlink extends LabelField {
     	 		{
     	 			parameter param1=(parameter)this.value;
     	 			salesControllerScreen sc=(salesControllerScreen)param1.getValue();
+    	 			sc.setId(this.idtienda);
     	 			sc.SalesToday();
     	 		}
     	 		catch(ClassCastException ex)
     	 		{
     	 			UiApplication.getUiApplication().popScreen((salesdetailsController)this.value);
     	 			salesControllerScreen sc=(salesControllerScreen)UiApplication.getUiApplication().getActiveScreen();
+    	 			sc.setId(this.idtienda);
     	 			sc.SalesToday();
+    	 		}    	 		
+    	 	break;    	 	
+    	 	case options.VENTASSEMANA:    	 		
+    	 		try
+    	 		{
+    	 			parameter param1=(parameter)this.value;
+    	 			salesControllerScreen sc=(salesControllerScreen)param1.getValue();
+    	 			sc.setId(this.idtienda);
+    	 			sc.SalesWeek();
+    	 		}
+    	 		catch(ClassCastException ex)
+    	 		{
+    	 			UiApplication.getUiApplication().popScreen((salesdetailsController)this.value);
+    	 			salesControllerScreen sc=(salesControllerScreen)UiApplication.getUiApplication().getActiveScreen();
+    	 			sc.setId(this.idtienda);
+    	 			sc.SalesWeek();
+    	 		}    	 		
+    	 	break;    	 	
+    	 	case options.ALL:    	 		
+    	 		try
+    	 		{
+    	 			parameter param1=(parameter)this.value;
+    	 			salesControllerScreen sc=(salesControllerScreen)param1.getValue();
+    	 			sc.setId(1);
+    	 			sc.SalesALL();
+    	 		}
+    	 		catch(ClassCastException ex)
+    	 		{
+    	 			UiApplication.getUiApplication().popScreen((salesdetailsController)this.value);
+    	 			salesControllerScreen sc=(salesControllerScreen)UiApplication.getUiApplication().getActiveScreen();
+    	 			sc.setId(this.idtienda);
+    	 			sc.SalesWeek();
     	 		}    	 		
     	 	break;    	 	
     	 	//case options.VENTASAYER:
