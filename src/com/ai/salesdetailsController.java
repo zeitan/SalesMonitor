@@ -24,6 +24,7 @@ private String pin;
 private EncodedImage avatar;
 private int fontsizeheader=DataStore.getFontHeaderSize();
 private int fontsizedetails=DataStore.getFontDetailsSize();
+private String fecha;
 public salesdetailsController (int idtienda, String pin) {
 
         super(Manager.NO_VERTICAL_SCROLL | Manager.NO_VERTICAL_SCROLLBAR);
@@ -54,6 +55,7 @@ this.pin=sc.getPin();
 this.avatar=((EncodedImage)((parameter)params.get(options.getName(options.AVATAR))).getValue());
 this.fontsizeheader=((Integer)((parameter)params.get(options.getName(options.FONTHEADER))).getValue()).intValue();
 this.fontsizedetails=((Integer)((parameter)params.get(options.getName(options.FONTDETAILS))).getValue()).intValue();
+this.fecha=((parameter)params.get(options.getName(options.FECHA))).getValue().toString();
 this.paintScreen();
 if (this.cantidad>cantidad)
 sc.repaintScreen();
@@ -76,6 +78,14 @@ private void paintScreen()
          param=new parameter("hashkey", hashkey);
          ++countParams;
          params.put(new Integer(countParams), param);
+         
+         if(this.webmethod.equals("ventas_dia5hora"))         {
+        	 
+        	 String fechaParam=this.fecha.substring(6, 10)+"-"+this.fecha.substring(3, 5)+"-"+this.fecha.substring(0, 2);
+	         param=new parameter("dia",  fechaParam);
+	         ++countParams;
+	         params.put(new Integer(countParams), param);
+         }
 
         
          Vector result=model.adquireData(this.webmethod, "http://tempuri.org#"+this.webmethod, params);
@@ -181,7 +191,17 @@ private VerticalFieldManager buildPanel(String header, String details, int color
 			parameter param1=new parameter("idtienda", new Integer(idtienda));
 			params.addElement(param1);		
 		}
-		
+		if(this.webmethod.equals("ventas_dia5hora"))
+		{
+			parameter paramSalesToday=new parameter(options.getName(options.VENTASHOY),this);
+			params.addElement(paramSalesToday);
+			parameter paramSalesYesterday=new parameter(options.getName(options.VENTASAYER),this);
+			params.addElement(paramSalesYesterday);			
+			parameter paramSalesWeek=new parameter(options.getName(options.VENTASSEMANA),this);
+			params.addElement(paramSalesWeek);
+			parameter param1=new parameter("idtienda", new Integer(idtienda));
+			params.addElement(param1);		
+		}		
 		
 		
 		

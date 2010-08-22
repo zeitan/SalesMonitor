@@ -21,6 +21,7 @@ public class options
 	final static int FONTHEADER=14;
 	final static int FONTDETAILS=15;
 	final static int ALL=16;
+	final static int FECHA=17;
 
 	
 	final static int BLUE=1799612;
@@ -64,6 +65,8 @@ public class options
 				return "Font details";	
 			case ALL:
 				return "Todas";	
+			case FECHA:
+				return "Fecha";	
 				
 				
 		}
@@ -87,6 +90,7 @@ public class options
 		if (option.equals("Font header")) return FONTHEADER;
 		if (option.equals("Font details")) return FONTDETAILS;
 		if (option.equals("Todas")) return ALL;
+		if (option.equals("Fecha")) return FECHA;
 		return -1;
 	}	
 	 

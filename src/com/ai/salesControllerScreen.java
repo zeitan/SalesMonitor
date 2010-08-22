@@ -1,6 +1,7 @@
 package com.ai;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.TimeZone;
 import java.util.Date;
 import java.util.Vector;
 import java.util.Hashtable;
@@ -139,11 +140,11 @@ public void setId(int id) {
         String fecha=((SoapObject) result.elementAt(0)).getProperty(1).toString();
         LabelField status;
         if(this.webmethod.equals("ventas_hoy"))
-        status= new LabelField(fecha+" "+hora);
+        	status= new LabelField(fecha+" "+hora);
         else
-        status= new LabelField(fecha);
-               setTitle(options.appName +"-" + options.appVersion);
-               setStatus(status);
+        	status= new LabelField(fecha);
+       setTitle(options.appName +"-" + options.appVersion);
+       setStatus(status);
        
 			for(int i=0; i<result.size();i++)
 			{
@@ -163,7 +164,7 @@ public void setId(int id) {
 				EncodedImage myImage = EncodedImage.createEncodedImage(bs, 0, bs.length);
 				
 				
-				mVerticalPanel.add(this.buildPanel(header, details, colorpanel, colorlabel, myImage,Integer.parseInt(data.getProperty(4).toString()) ,Float.parseFloat(cantidadS),this.webmethodDetails));
+				mVerticalPanel.add(this.buildPanel(header, details, colorpanel, colorlabel, myImage,Integer.parseInt(data.getProperty(4).toString()) ,Float.parseFloat(cantidadS),this.webmethodDetails,""));
 			
 			
 			}
@@ -207,7 +208,7 @@ public void setId(int id) {
          this.add(new RichTextField(ex.getMessage()));
         }
 	}
-    private VerticalFieldManager buildPanel(String header, String details, int colorpanel, int colorlabel, EncodedImage avatar, int idtienda, float cantidad, String webmethod)
+    private VerticalFieldManager buildPanel(String header, String details, int colorpanel, int colorlabel, EncodedImage avatar, int idtienda, float cantidad, String webmethod, String fecha)
     {
      PanelHorizontalFieldManager HorizontalManager1 = new PanelHorizontalFieldManager(HorizontalFieldManager.FOCUSABLE);
      HorizontalFieldManager explodeManager= new HorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | HorizontalFieldManager.FIELD_HCENTER | HorizontalFieldManager.FIELD_VCENTER);     
@@ -276,6 +277,9 @@ public void setId(int id) {
 	
 	parameter param7=new parameter("fontdetails", new Integer(this.fontsizedetails));
 	paramsDetails.put(options.getName(options.FONTDETAILS), param7);
+	parameter param8=new parameter("fecha", fecha);
+	paramsDetails.put(options.getName(options.FECHA), param8);
+	
 	
 	
 	
@@ -354,9 +358,13 @@ public void setId(int id) {
 	private String[] RangeWeek()
 	{
 		  String[] fechas=new String[2];
-		  Calendar begindate =Calendar.getInstance();
-		  SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		  TimeZone tz = TimeZone.getTimeZone("GMT-0430");
+		  Calendar begindate =Calendar.getInstance(tz);	
+		  int gmtOffset = tz.getOffset(1, begindate.get(Calendar.YEAR), begindate.get(Calendar.MONTH), begindate.get(Calendar.DATE), begindate.get(Calendar.DAY_OF_WEEK), begindate.get(Calendar.MILLISECOND)); 
+		  SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");		  
           java.util.Date date = begindate.getTime();
+          long currentTime=date.getTime()+gmtOffset;
+          date.setTime(currentTime); 
           String endDate = dateFormat.format(date);          
           int dayofweek=begindate.get(Calendar.DAY_OF_WEEK);
           if (dayofweek==1)
@@ -433,8 +441,10 @@ public void setId(int id) {
     				byte[] bs = Base64InputStream.decode(imageBytes, 0, imageBytes.length);
     				EncodedImage myImage = EncodedImage.createEncodedImage(bs, 0, bs.length);
     				
-    				
-    				semanaManager.add(this.buildPanel(header, details, colorpanel, colorlabel, myImage,Integer.parseInt(row.getProperty(4).toString()) ,Float.parseFloat(cantidadS),this.webmethodDetails));
+    				if (j<datainterna.size()-1)
+    					semanaManager.add(this.buildPanel(header, details, colorpanel, colorlabel, myImage,Integer.parseInt(row.getProperty(4).toString()) ,Float.parseFloat(cantidadS),"ventas_dia5hora",fecha));
+    				else
+    					semanaManager.add(this.buildPanel(header, details, colorpanel, colorlabel, myImage,Integer.parseInt(row.getProperty(4).toString()) ,Float.parseFloat(cantidadS),"ventas_hoy5hora",""));
     			}
     			add(semanaManager);
     		}
