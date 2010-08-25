@@ -46,20 +46,19 @@ main.repaintScreen();
 
 public salesdetailsController(Hashtable params)
 {
-super(Manager.NO_VERTICAL_SCROLL | Manager.NO_VERTICAL_SCROLLBAR);
-this.webmethod=((parameter)params.get(options.getName(options.WEBMETHOD))).getValue().toString();
-this.idtienda= ((Integer)((parameter)params.get(options.getName(options.IDTIENDA))).getValue()).intValue();
-float cantidad= ((Float)((parameter)params.get(options.getName(options.CANTIDAD))).getValue()).floatValue();
-salesControllerScreen sc= ((salesControllerScreen)((parameter)params.get(options.getName(options.MAIN))).getValue());
-this.pin=sc.getPin();
-this.avatar=((EncodedImage)((parameter)params.get(options.getName(options.AVATAR))).getValue());
-this.fontsizeheader=((Integer)((parameter)params.get(options.getName(options.FONTHEADER))).getValue()).intValue();
-this.fontsizedetails=((Integer)((parameter)params.get(options.getName(options.FONTDETAILS))).getValue()).intValue();
-this.fecha=((parameter)params.get(options.getName(options.FECHA))).getValue().toString();
-this.paintScreen();
-if (this.cantidad>cantidad)
-sc.repaintScreen();
-
+	super(Manager.NO_VERTICAL_SCROLL | Manager.NO_VERTICAL_SCROLLBAR);
+	this.webmethod=((parameter)params.get(options.getName(options.WEBMETHOD))).getValue().toString();
+	this.idtienda= ((Integer)((parameter)params.get(options.getName(options.IDTIENDA))).getValue()).intValue();
+	float cantidad= ((Float)((parameter)params.get(options.getName(options.CANTIDAD))).getValue()).floatValue();
+	salesControllerScreen sc= ((salesControllerScreen)((parameter)params.get(options.getName(options.MAIN))).getValue());
+	this.pin=sc.getPin();
+	this.avatar=((EncodedImage)((parameter)params.get(options.getName(options.AVATAR))).getValue());
+	this.fontsizeheader=((Integer)((parameter)params.get(options.getName(options.FONTHEADER))).getValue()).intValue();
+	this.fontsizedetails=((Integer)((parameter)params.get(options.getName(options.FONTDETAILS))).getValue()).intValue();
+	this.fecha=((parameter)params.get(options.getName(options.FECHA))).getValue().toString();
+	this.paintScreen();
+	if (this.cantidad>cantidad)
+	sc.repaintScreen();
 }
 
 private void paintScreen()
@@ -91,61 +90,61 @@ private void paintScreen()
          Vector result=model.adquireData(this.webmethod, "http://tempuri.org#"+this.webmethod, params);
          if (result.size()>0)
          {
-         HorizontalFieldManager mMainPanel;
-         VerticalFieldManager mVerticalPanel;
-         mMainPanel = new HorizontalFieldManager(USE_ALL_HEIGHT| USE_ALL_WIDTH);
-         mVerticalPanel = new VerticalFieldManager(VERTICAL_SCROLL | VERTICAL_SCROLLBAR);
-        
-        
-         HorizontalFieldManager avatarPanel=new HorizontalFieldManager( USE_ALL_WIDTH);
-
-         //A HorizontalFieldManager to hold the column headings.
-                //HorizontalFieldManager avatarPanel = new HorizontalFieldManager(HorizontalFieldManager.NO_HORIZONTAL_SCROLL
-                // | HorizontalFieldManager.NO_VERTICAL_SCROLL | HorizontalFieldManager.USE_ALL_WIDTH);
-                      
-         String fecha=((SoapObject) result.elementAt(0)).getProperty(1).toString();
-         String tienda=((SoapObject) result.elementAt(0)).getProperty(0).toString();
-        
-         BitmapField bf=new BitmapField();
-         bf.setImage(this.avatar);
-         avatarPanel.add(bf);
-         avatarPanel.add(new LabelField(tienda));
-         mVerticalPanel.add(avatarPanel);
-         mMainPanel.add(mVerticalPanel);
-         LabelField status= new LabelField(fecha);
-         setTitle(options.appName +"-" + options.appVersion);
-                setStatus(status);
-		for(int i=0; i<result.size();i++)
-		{
-			SoapObject data=(SoapObject) result.elementAt(i);
-			String header=data.getProperty(2).toString();
-			String details="Ventas: "+data.getProperty(3)+" Contado:"+data.getProperty(5)+" Credito:"+data.getProperty(6)+" Devoluciones:"+data.getProperty(7)+" T.Tickets:"+data.getProperty(8);
-			int colorpanel=(i%2==0)?options.BLUE:options.WHITE;
-			int colorlabel=(i%2==0)?options.WHITE:options.BLACK;
-			
-			mVerticalPanel.add(this.buildPanel(header, details, colorpanel, colorlabel, Integer.parseInt(data.getProperty(4).toString()) ,this.webmethod));
-			
-			String cantidadS=data.getProperty(3).toString().replace('.', ' ');
-			cantidadS=cantidadS.trim();
-			cantidadS=salesmonitorutility.removeBlankSpace(cantidadS);
-			cantidadS=cantidadS.replace(',', '.');
-			this.cantidad+=Float.valueOf(cantidadS).floatValue();
-		}
-		add(mMainPanel);
-        }
+	         HorizontalFieldManager mMainPanel;
+	         VerticalFieldManager mVerticalPanel;
+	         mMainPanel = new HorizontalFieldManager(USE_ALL_HEIGHT| USE_ALL_WIDTH);
+	         mVerticalPanel = new VerticalFieldManager(VERTICAL_SCROLL | VERTICAL_SCROLLBAR);
+	        
+	        
+	         HorizontalFieldManager avatarPanel=new HorizontalFieldManager( USE_ALL_WIDTH);
+	
+	         //A HorizontalFieldManager to hold the column headings.
+	                //HorizontalFieldManager avatarPanel = new HorizontalFieldManager(HorizontalFieldManager.NO_HORIZONTAL_SCROLL
+	                // | HorizontalFieldManager.NO_VERTICAL_SCROLL | HorizontalFieldManager.USE_ALL_WIDTH);
+	                      
+	         String fecha=((SoapObject) result.elementAt(0)).getProperty(1).toString();
+	         String tienda=((SoapObject) result.elementAt(0)).getProperty(0).toString();
+	        
+	         BitmapField bf=new BitmapField();
+	         bf.setImage(this.avatar);
+	         avatarPanel.add(bf);
+	         avatarPanel.add(new LabelField(tienda));
+	         mVerticalPanel.add(avatarPanel);
+	         mMainPanel.add(mVerticalPanel);
+	         LabelField status= new LabelField(fecha);
+	         setTitle(options.appName +"-" + options.appVersion);
+	                setStatus(status);
+			for(int i=0; i<result.size();i++)
+			{
+				SoapObject data=(SoapObject) result.elementAt(i);
+				String header=data.getProperty(2).toString();
+				String details="Ventas: "+data.getProperty(3)+" Contado:"+data.getProperty(5)+" Credito:"+data.getProperty(6)+" Devoluciones:"+data.getProperty(7)+" T.Tickets:"+data.getProperty(8);
+				int colorpanel=(i%2==0)?options.BLUE:options.WHITE;
+				int colorlabel=(i%2==0)?options.WHITE:options.BLACK;
+				
+				mVerticalPanel.add(this.buildPanel(header, details, colorpanel, colorlabel, Integer.parseInt(data.getProperty(4).toString()) ,this.webmethod));
+				
+				String cantidadS=data.getProperty(3).toString().replace('.', ' ');
+				cantidadS=cantidadS.trim();
+				cantidadS=salesmonitorutility.removeBlankSpace(cantidadS);
+				cantidadS=cantidadS.replace(',', '.');
+				this.cantidad+=Float.valueOf(cantidadS).floatValue();
+			}
+			add(mMainPanel);
+	    }
+         else
+        	 this.ShowError("No se devolvio Información");
         }
         catch(Exception ex)
         {
-         add(new RichTextField(ex.getMessage()));
+        	this.ShowError(ex.getMessage());         
         }
 
 }
-private VerticalFieldManager buildPanel(String header, String details, int colorpanel, int colorlabel, int idtienda, String webmethod)
+	private VerticalFieldManager buildPanel(String header, String details, int colorpanel, int colorlabel, int idtienda, String webmethod) throws Exception
     {
 	     PanelHorizontalFieldManager HorizontalManager1 = new PanelHorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | USE_ALL_WIDTH );
 	     HorizontalFieldManager explodeManager= new HorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | HorizontalFieldManager.FIELD_HCENTER | HorizontalFieldManager.FIELD_VCENTER);
-//BitmapField bf=new BitmapField(avatar);
-
 		moneylabelfield lfhead=new moneylabelfield(header,colorlabel);
 		moneylabelfield lfdetails=new moneylabelfield(details,colorlabel);
 		
@@ -218,10 +217,42 @@ private VerticalFieldManager buildPanel(String header, String details, int color
 		}
 		catch(Exception ex)
 		{
-		System.out.println(ex.getMessage());
-		return null;
+			throw new Exception(ex.getMessage());
 		}
 
     }
+
+	private void clearScreen()
+	{
+	 try
+	 {
+		 this.deleteAll();
+	 }
+	 catch(Exception ex)
+	 {
+		 this.add(new RichTextField(ex.getMessage()));
+	 }
+	}
+	private void ShowError(String message)
+	{
+		this.clearScreen();
+		Font fontheader=null;
+	    try
+	    {
+	    	fontheader = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, this.fontsizeheader);
+	    }
+		catch (Exception e)
+		{
+		}
+	    VerticalFieldManager mVerticalPanel = new VerticalFieldManager(USE_ALL_HEIGHT | HorizontalFieldManager.FIELD_HCENTER | VerticalFieldManager.FIELD_VCENTER);
+	    Bitmap avatar=Bitmap.getBitmapResource("MoNeY.png");
+	    BitmapField bf=new BitmapField(avatar);	
+	    mVerticalPanel.add(bf);
+		LabelField lfhead=new LabelField(message); 
+		lfhead.setFont(fontheader.derive(Font.BOLD));
+		mVerticalPanel.add(lfhead);
+		add(mVerticalPanel);    	
+		
+	}
 }
 

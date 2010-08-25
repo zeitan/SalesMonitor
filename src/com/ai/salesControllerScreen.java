@@ -69,11 +69,11 @@ public void setId(int id) {
     {
      try
      {
-     this.deleteAll();
+    	 this.deleteAll();
      }
      catch(Exception ex)
      {
-     this.add(new RichTextField(ex.getMessage()));
+    	 this.add(new RichTextField(ex.getMessage()));
      }
     }
 
@@ -135,16 +135,16 @@ public void setId(int id) {
         
         if(result.size()>0)
         {
-        this.datacache=result;	 
-        String hora=((SoapObject) result.elementAt(0)).getProperty(2).toString();
-        String fecha=((SoapObject) result.elementAt(0)).getProperty(1).toString();
-        LabelField status;
-        if(this.webmethod.equals("ventas_hoy"))
-        	status= new LabelField(fecha+" "+hora);
-        else
-        	status= new LabelField(fecha);
-       setTitle(options.appName +"-" + options.appVersion);
-       setStatus(status);
+	        this.datacache=result;	 
+	        String hora=((SoapObject) result.elementAt(0)).getProperty(2).toString();
+	        String fecha=((SoapObject) result.elementAt(0)).getProperty(1).toString();
+	        LabelField status;
+	        if(this.webmethod.equals("ventas_hoy"))
+	        	status= new LabelField(fecha+" "+hora);
+	        else
+	        	status= new LabelField(fecha);
+	       setTitle(options.appName +"-" + options.appVersion);
+	       setStatus(status);
        
 			for(int i=0; i<result.size();i++)
 			{
@@ -171,11 +171,11 @@ public void setId(int id) {
 		
         }
         else
-        mVerticalPanel.add(new RichTextField("No se devolvio informaci?n"));
+        	this.ShowError("No se devolvio información");       
 		}
 		catch (Exception ex)
 		{
-			System.out.println(ex.getMessage());
+			this.ShowError(ex.getMessage());			
 		}
 		
 	}
@@ -205,26 +205,11 @@ public void setId(int id) {
         }
         catch(Exception ex)
         {
-        	Font fontheader=null;
-	        try
-	        {
-	        	fontheader = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, this.fontsizeheader);
-	        }
-			catch (Exception e)
-			{
-			}
-	        VerticalFieldManager mVerticalPanel = new VerticalFieldManager(USE_ALL_HEIGHT | HorizontalFieldManager.FIELD_HCENTER | VerticalFieldManager.FIELD_VCENTER);
-	        Bitmap avatar=Bitmap.getBitmapResource("MoNeY.png");
-	        BitmapField bf=new BitmapField(avatar);	
-	        mVerticalPanel.add(bf);
-			LabelField lfhead=new LabelField(ex.getMessage()); 
-			lfhead.setFont(fontheader.derive(Font.BOLD));
-			mVerticalPanel.add(lfhead);
-			add(mVerticalPanel);
+        	this.ShowError(ex.getMessage());
 	        
         }
 	}
-    private VerticalFieldManager buildPanel(String header, String details, int colorpanel, int colorlabel, EncodedImage avatar, int idtienda, float cantidad, String webmethod, String fecha)
+    private VerticalFieldManager buildPanel(String header, String details, int colorpanel, int colorlabel, EncodedImage avatar, int idtienda, float cantidad, String webmethod, String fecha) throws Exception
     {
      PanelHorizontalFieldManager HorizontalManager1 = new PanelHorizontalFieldManager(HorizontalFieldManager.FOCUSABLE);
      HorizontalFieldManager explodeManager= new HorizontalFieldManager(HorizontalFieldManager.FOCUSABLE | HorizontalFieldManager.FIELD_HCENTER | HorizontalFieldManager.FIELD_VCENTER);     
@@ -361,8 +346,9 @@ public void setId(int id) {
 	}
 	catch(Exception ex)
 	{
-	System.out.println(ex.getMessage());
-	return null;
+		throw new Exception(ex.getMessage());
+		//this.ShowError(ex.getMessage());	
+		
 	}
 
     }
@@ -370,6 +356,28 @@ public void setId(int id) {
     {
      this.clearScreen();
      this.paintScreen();
+    }
+    
+    private void ShowError(String message)
+    {
+    	this.clearScreen();
+    	Font fontheader=null;
+        try
+        {
+        	fontheader = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, this.fontsizeheader);
+        }
+		catch (Exception e)
+		{
+		}
+        VerticalFieldManager mVerticalPanel = new VerticalFieldManager(USE_ALL_HEIGHT | HorizontalFieldManager.FIELD_HCENTER | VerticalFieldManager.FIELD_VCENTER);
+        Bitmap avatar=Bitmap.getBitmapResource("MoNeY.png");
+        BitmapField bf=new BitmapField(avatar);	
+        mVerticalPanel.add(bf);
+		LabelField lfhead=new LabelField(message); 
+		lfhead.setFont(fontheader.derive(Font.BOLD));
+		mVerticalPanel.add(lfhead);
+		add(mVerticalPanel);    	
+    	
     }
 	private String[] RangeWeek()
 	{
@@ -469,7 +477,7 @@ public void setId(int id) {
         }
         catch(Exception ex)
         {
-        	System.out.println(ex.getMessage());
+        	this.ShowError(ex.getMessage());        	
         }    	
     	
     }
