@@ -205,7 +205,23 @@ public void setId(int id) {
         }
         catch(Exception ex)
         {
-         this.add(new RichTextField(ex.getMessage()));
+        	Font fontheader=null;
+	        try
+	        {
+	        	fontheader = FontFamily.forName("BBClarity").getFont(FontFamily.SCALABLE_FONT, this.fontsizeheader);
+	        }
+			catch (Exception e)
+			{
+			}
+	        VerticalFieldManager mVerticalPanel = new VerticalFieldManager(USE_ALL_HEIGHT | HorizontalFieldManager.FIELD_HCENTER | VerticalFieldManager.FIELD_VCENTER);
+	        Bitmap avatar=Bitmap.getBitmapResource("MoNeY.png");
+	        BitmapField bf=new BitmapField(avatar);	
+	        mVerticalPanel.add(bf);
+			LabelField lfhead=new LabelField(ex.getMessage()); 
+			lfhead.setFont(fontheader.derive(Font.BOLD));
+			mVerticalPanel.add(lfhead);
+			add(mVerticalPanel);
+	        
         }
 	}
     private VerticalFieldManager buildPanel(String header, String details, int colorpanel, int colorlabel, EncodedImage avatar, int idtienda, float cantidad, String webmethod, String fecha)

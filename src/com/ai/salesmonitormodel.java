@@ -10,6 +10,7 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransport;
 import org.xmlpull.v1.XmlPullParserException;
 import net.rim.device.api.i18n.ResourceBundle;
+import org.ksoap2.SoapFault;
 
 public class salesmonitormodel 
 {
@@ -55,12 +56,13 @@ public class salesmonitormodel
 		    
             // do something with this later.
         }
-        catch (IOException e) {
-    		e.printStackTrace();
-
-    		throw new Exception(e.getMessage());
+        catch (IOException e) 
+        {
+        	if (e instanceof SoapFault)
+        		throw new Exception(((SoapFault)e).faultstring);
+        	else
+        		throw new Exception(e.getMessage());
     	} catch (XmlPullParserException e) {
-    		e.printStackTrace();
     		throw new Exception(ht.responseDump);
     	}
         

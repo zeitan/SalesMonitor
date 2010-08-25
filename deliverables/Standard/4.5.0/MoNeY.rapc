@@ -1,9 +1,9 @@
 MIDlet-Name: SalesMonitor
-MIDlet-Version: 0.8.0
+MIDlet-Version: 0.9.0
 MIDlet-Vendor: AB
 MIDlet-Jar-URL: SalesMonitor.jar
 MIDlet-Jar-Size: 0
 MicroEdition-Profile: MIDP-2.0
 MicroEdition-Configuration: CLDC-1.1
-MIDlet-1: MoNeY!,MoNeY.png,
+MIDlet-1: MoNeY!,com/ai/MoNeY.png,
 RIM-MIDlet-Flags-1: 0
