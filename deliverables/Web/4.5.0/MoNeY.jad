@@ -10,7 +10,7 @@ RIM-COD-SHA1: 16 45 49 8e 79 db 41 7d 9d 1d 9c 0f 66 2e 8e 7e 61 93 bd ac
 RIM-COD-Size: 64672
 MicroEdition-Configuration: CLDC-1.1
 MIDlet-Version: 0.8.0
-MIDlet-Name: MoNeY
+MIDlet-Name: SalesMonitor
 MIDlet-Vendor: AB
 MicroEdition-Profile: MIDP-2.0
 RIM-MIDlet-Flags-1: 0
