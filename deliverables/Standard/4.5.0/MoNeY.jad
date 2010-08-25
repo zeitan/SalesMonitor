@@ -1,13 +1,13 @@
 Manifest-Version: 1.0
 RIM-COD-Module-Name: MoNeY
 RIM-COD-Module-Dependencies: net_rim_cldc,net_rim_os
-MIDlet-Jar-Size: 99576
+MIDlet-Jar-Size: 99553
 MIDlet-1: MoNeY!,MoNeY.png,
-RIM-COD-Creation-Time: 1282484400
+RIM-COD-Creation-Time: 1282696268
 MIDlet-Jar-URL: SalesMonitor.jar
 RIM-COD-URL: MoNeY.cod
-RIM-COD-SHA1: 0a 62 2f 78 87 85 74 cb 9f 8b 76 6a 0c af 2e ce 84 4b e1 91
-RIM-COD-Size: 64692
+RIM-COD-SHA1: 4b 92 75 26 af 2e 75 71 ed e1 7b da 4c 85 33 39 65 bd 17 cf
+RIM-COD-Size: 64672
 MicroEdition-Configuration: CLDC-1.1
 MIDlet-Version: 0.8.0
 MIDlet-Name: SalesMonitor

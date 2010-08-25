@@ -371,6 +371,7 @@ public void setId(int id) {
         	  dayofweek=7;
           else
         	  --dayofweek;
+          
           int dayMinus=dayofweek-1;
           if (dayMinus==0)
           {
@@ -379,8 +380,8 @@ public void setId(int id) {
           }
           else
           {    	  
-	          long ctime = begindate.getTime().getTime();
-	          long ctimeMinusNDays = ctime - dayMinus * ((long)DateTimeUtilities.ONEDAY);  // not usre the 'longs are needed
+	          //long ctime = begindate.getTime().getTime()+gmtOffset;        	  
+	          long ctimeMinusNDays = currentTime - dayMinus * ((long)DateTimeUtilities.ONEDAY);  // not usre the 'longs are needed
 	          begindate.setTime(new Date(ctimeMinusNDays));
 	          String beginDate = dateFormat.format(begindate.getTime());
         	  fechas[0]=beginDate;
