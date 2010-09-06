@@ -182,7 +182,7 @@ public void setId(int id) {
     private void paintScreen()
     {
      //Bitmap avatar=Bitmap.getBitmapResource("border.png");
-     salesmonitormodel model= new salesmonitormodel();
+    	salesmonitormodel model= new salesmonitormodel();
         Hashtable params= new Hashtable();
         int countParams=0;
         String hashkey=salesmonitorutility.hashPin(this.pin);
