@@ -43,16 +43,20 @@ public class ScreenTestManager extends MainScreen
          param=new parameter("hashkey", hashkey);
          ++countParams;
          params.put(new Integer(countParams), param);
-         this.add(new LabelField(salesmonitorutility.updateConnectionSuffix()));
+         
          if(RadioInfo.getSignalLevel() != RadioInfo.LEVEL_NO_COVERAGE)
         	 this.add(new LabelField("Tiene Señal de Radio"));
          else
         	 this.add(new LabelField("No Tiene Señal de Radio"));
+         
          if((RadioInfo.getNetworkService() & RadioInfo.NETWORK_SERVICE_DATA)>0)
         	 this.add(new LabelField("Tiene conexión de datos"));
          else
         	 this.add(new LabelField("No Tiene conexión de datos"));
     
+         //this.add(new LabelField(salesmonitorutility.updateConnectionSuffix()));
+         this.add(new LabelField(options.appVersion));
+         
          Vector result=model.adquireData(this.webmethod, "http://tempuri.org#"+ this.webmethod, params);
          
          this.add(new LabelField(new Integer(result.size()).toString()));

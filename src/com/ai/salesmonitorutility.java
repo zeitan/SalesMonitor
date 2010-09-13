@@ -60,7 +60,7 @@ public class salesmonitorutility
         }
         if (uid != null) {
             // WAP2 Connection
-             connSuffix = ";ConnectionUID="+uid;
+             connSuffix = ";ConnectionUID="+uid+";deviceside=true";
         } else {
              connSuffix = ";deviceside=true";
         }

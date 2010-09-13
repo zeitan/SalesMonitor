@@ -20,6 +20,7 @@ public class salesmonitormodel
 	{
 		//ResourceBundle _resources = ResourceBundle.getBundle(BUNDLE_ID, BUNDLE_NAME);
 		this.appserver=DataStore.getAppServerUrl()+salesmonitorutility.updateConnectionSuffix();
+		//this.appserver=DataStore.getAppServerUrl()+";deviceside=true";
 		//this.appserver=_resources.getString(URLWS)+";deviceside=true;interface=wifi";
 	}
 	public Vector adquireData(String webmethod,String soapaction, Hashtable parameters) throws Exception
